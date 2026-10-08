@@ -2,10 +2,11 @@
  * Google Apps Script for "Legal Maxims Simplified" Order Management & Tracking
  * 
  * FEATURES:
- * 1. Automatic Header Creation & Styling (with Order Tracking fields).
- * 2. Robust doPost(e): Accepts both JSON payload and Form-encoded data.
- * 3. doGet(e): Supports Order Tracking lookup (e.g. ?track=LMS-123456).
- * 4. setupSheetHeaders(): Run this function once in Apps Script to instantly style your Sheet!
+ * 1. Automatic Header Creation & Styling.
+ * 2. Deduplication Protection (Prevents double recording).
+ * 3. doPost(e): Appends incoming orders cleanly once.
+ * 4. doGet(e): Supports Order Tracking lookup (e.g. ?track=LMS-123456).
+ * 5. setupSheetHeaders(): Run this function once in Apps Script to style your Sheet!
  */
 
 var HEADERS = [
@@ -33,22 +34,14 @@ var HEADERS = [
 function setupSheetHeaders() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
-  // Set headers in Row 1
   sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
-  
-  // Style the header row
   var headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
   headerRange.setBackground("#ea580c"); // Theme Orange
   headerRange.setFontColor("#ffffff");
   headerRange.setFontWeight("bold");
   headerRange.setHorizontalAlignment("center");
-  headerRange.setVerticalAlignment("middle");
   sheet.setRowHeight(1, 38);
-  
-  // Freeze Header Row so it stays visible while scrolling
   sheet.setFrozenRows(1);
-  
-  // Auto-resize columns
   for (var col = 1; col <= HEADERS.length; col++) {
     sheet.autoResizeColumn(col);
   }
@@ -72,16 +65,12 @@ function doPost(e) {
 
     var data = {};
 
-    // 1. Try parsing raw JSON content
     if (e.postData && e.postData.contents) {
       try {
         data = JSON.parse(e.postData.contents);
-      } catch (err) {
-        // If not JSON, check parameters
-      }
+      } catch (err) {}
     }
 
-    // 2. If data is still empty or passed via form parameters
     if (!data.name && e.parameter) {
       if (e.parameter.postData) {
         try {
@@ -93,37 +82,54 @@ function doPost(e) {
       }
     }
 
+    var orderRef = data.orderRef || "LMS-" + Math.floor(100000 + Math.random() * 900000);
+
+    // DEDUPLICATION CHECK: Check if this orderRef was already recorded in the last 10 rows
+    var lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      var checkRange = Math.min(15, lastRow - 1);
+      var recentRefs = sheet.getRange(lastRow - checkRange + 1, 1, checkRange, 1).getValues();
+      for (var r = 0; r < recentRefs.length; r++) {
+        if (recentRefs[r][0] && String(recentRefs[r][0]).trim() === String(orderRef).trim()) {
+          // Already recorded, return success without duplicate insert
+          return ContentService.createTextOutput(
+            JSON.stringify({ status: "already_exists", orderRef: orderRef })
+          ).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+    }
+
     // Initial statuses for order tracking
     var initialPaymentStatus = data.deliveryOption === 'Direct Order' 
       ? "Pending Full Confirmation" 
       : "Pending ₦5k Delivery Fee";
     var initialDeliveryStatus = "Processing Order";
 
-    // Append new order row
+    // Append single order row
     sheet.appendRow([
-      data.orderRef || "LMS-" + Math.floor(100000 + Math.random() * 900000), // A: Order Ref
-      data.date || new Date().toLocaleString(),                              // B: Timestamp
-      data.name || "N/A",                                                    // C: Customer Name
-      data.email || "N/A",                                                   // D: Email
-      data.phone || "N/A",                                                   // E: Phone
-      data.bookType || "Hard Copy (Physical)",                               // F: Book Type
-      data.quantity || 1,                                                    // G: Quantity
-      data.discount || "None (0%)",                                          // H: Discount
-      data.deliveryOption || "Direct Order",                                 // I: Option
-      data.address || "N/A",                                                 // J: Delivery Address
-      data.totalCost || "₦15,000",                                           // K: Total Cost
-      data.amountDueNow || "₦15,000",                                        // L: Amount Due Now
-      data.balanceOnDelivery || "₦0",                                        // M: Balance on Delivery
-      initialPaymentStatus,                                                  // N: Payment Status
-      initialDeliveryStatus,                                                 // O: Delivery Status
-      ""                                                                     // P: Tracking / Waybill No
+      orderRef,                                              // A: Order Ref
+      data.date || new Date().toLocaleString(),              // B: Timestamp
+      data.name || "N/A",                                    // C: Customer Name
+      data.email || "N/A",                                   // D: Email
+      data.phone || "N/A",                                   // E: Phone
+      data.bookType || "Hard Copy (Physical)",               // F: Book Type
+      data.quantity || 1,                                    // G: Quantity
+      data.discount || "None (0%)",                          // H: Discount
+      data.deliveryOption || "Direct Order",                 // I: Option
+      data.address || "N/A",                                 // J: Delivery Address
+      data.totalCost || "₦15,000",                           // K: Total Cost
+      data.amountDueNow || "₦15,000",                        // L: Amount Due Now
+      data.balanceOnDelivery || "₦0",                        // M: Balance on Delivery
+      initialPaymentStatus,                                  // N: Payment Status
+      initialDeliveryStatus,                                 // O: Delivery Status
+      ""                                                     // P: Tracking / Waybill No
     ]);
 
     return ContentService.createTextOutput(
       JSON.stringify({ 
         status: "success", 
-        orderRef: data.orderRef,
-        message: "Order successfully recorded and ready for tracking." 
+        orderRef: orderRef,
+        message: "Order successfully recorded." 
       })
     ).setMimeType(ContentService.MimeType.JSON);
 
@@ -139,7 +145,6 @@ function doPost(e) {
 
 /**
  * Handle GET requests — Supports Order Tracking Lookup
- * Example usage: https://script.google.com/.../exec?track=LMS-123456
  */
 function doGet(e) {
   var trackRef = e.parameter && e.parameter.track;
@@ -148,7 +153,6 @@ function doGet(e) {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = sheet.getDataRange().getValues();
     
-    // Search for order reference in Column A
     for (var i = 1; i < data.length; i++) {
       if (String(data[i][0]).trim().toUpperCase() === String(trackRef).trim().toUpperCase()) {
         return ContentService.createTextOutput(JSON.stringify({

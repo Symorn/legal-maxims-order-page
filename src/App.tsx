@@ -181,60 +181,17 @@ export default function App() {
       order_id: ref
     });
 
-    // Send data to Google Sheets Web App
+    // Send data to Google Sheets Web App (Single request)
     if (GOOGLE_SCRIPT_WEBAPP_URL) {
-      // Method 1: Fetch with text/plain
       try {
-        fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+        await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(orderData)
-        }).catch((err) => console.log('Fetch attempt:', err));
-      } catch (err) {
-        console.error('Google Sheet fetch error:', err);
-      }
-
-      // Method 2: Fallback hidden form submission (100% reliable for Google Apps Script in browsers)
-      try {
-        const iframeName = 'hidden_iframe_' + Date.now();
-        const iframe = document.createElement('iframe');
-        iframe.name = iframeName;
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-
-        const form = document.createElement('form');
-        form.target = iframeName;
-        form.action = GOOGLE_SCRIPT_WEBAPP_URL;
-        form.method = 'POST';
-        form.style.display = 'none';
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'postData';
-        input.value = JSON.stringify(orderData);
-        form.appendChild(input);
-
-        // Also add each individual parameter so e.parameter can read it directly
-        Object.entries(orderData).forEach(([k, v]) => {
-          const field = document.createElement('input');
-          field.type = 'hidden';
-          field.name = k;
-          field.value = String(v);
-          form.appendChild(field);
         });
-
-        document.body.appendChild(form);
-        form.submit();
-
-        setTimeout(() => {
-          try {
-            document.body.removeChild(form);
-            document.body.removeChild(iframe);
-          } catch (e) {}
-        }, 4000);
-      } catch (formErr) {
-        console.error('Form fallback error:', formErr);
+      } catch (err) {
+        console.error('Google Sheet submission error:', err);
       }
     }
 
