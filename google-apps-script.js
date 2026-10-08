@@ -1,16 +1,15 @@
 /**
- * Google Apps Script for "Legal Maxims Simplified" Order Management & Order Tracking
+ * Google Apps Script for "Legal Maxims Simplified" Order Management & Tracking
  * 
  * FEATURES:
- * 1. Automatic Header Generation & Styling (with Order Tracking fields).
- * 2. doPost(e): Automatically appends incoming orders from the order page.
- * 3. doGet(e): Supports Order Tracking lookup by Order Ref (e.g. ?track=LMS-123456).
- * 4. setupSheetHeaders(): Run this standalone once from the Apps Script editor to auto-create and style headers.
+ * 1. Automatic Header Creation & Styling (with Order Tracking fields).
+ * 2. Robust doPost(e): Accepts both JSON payload and Form-encoded data.
+ * 3. doGet(e): Supports Order Tracking lookup (e.g. ?track=LMS-123456).
+ * 4. setupSheetHeaders(): Run this function once in Apps Script to instantly style your Sheet!
  */
 
-// Define standard tracking headers
 var HEADERS = [
-  "Order Ref",             // Column A (Unique Reference for tracking)
+  "Order Ref",             // Column A (Tracking key)
   "Timestamp",             // Column B
   "Customer Name",         // Column C
   "Email Address",         // Column D
@@ -23,13 +22,13 @@ var HEADERS = [
   "Total Order Cost",      // Column K
   "Amount Due Now",        // Column L
   "Balance on Delivery",   // Column M
-  "Payment Status",        // Column N (e.g., Pending Fee Payment, Paid)
-  "Delivery Status",       // Column O (e.g., Processing, Dispatched, Delivered)
-  "Tracking / Waybill No"  // Column P (For courier/rider tracking number)
+  "Payment Status",        // Column N (Pending Fee Payment / Paid)
+  "Delivery Status",       // Column O (Processing / Dispatched / Delivered)
+  "Tracking / Waybill No"  // Column P (Courier / Rider details)
 ];
 
 /**
- * Run this function once from the Apps Script editor to create & format headers immediately!
+ * Run this function once from the Apps Script editor to create & style headers immediately!
  */
 function setupSheetHeaders() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -39,25 +38,24 @@ function setupSheetHeaders() {
   
   // Style the header row
   var headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
-  headerRange.setBackground("#ea580c"); // Theme orange
+  headerRange.setBackground("#ea580c"); // Theme Orange
   headerRange.setFontColor("#ffffff");
   headerRange.setFontWeight("bold");
-  headerRange.setFontFamily("Montserrat");
   headerRange.setHorizontalAlignment("center");
   headerRange.setVerticalAlignment("middle");
   sheet.setRowHeight(1, 38);
   
-  // Freeze Header Row
+  // Freeze Header Row so it stays visible while scrolling
   sheet.setFrozenRows(1);
   
-  // Auto-fit column widths
+  // Auto-resize columns
   for (var col = 1; col <= HEADERS.length; col++) {
     sheet.autoResizeColumn(col);
   }
 }
 
 /**
- * Handle incoming POST requests from the Book Order Page
+ * Handle incoming POST requests from the Order Page
  */
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -67,13 +65,33 @@ function doPost(e) {
     var doc = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = doc.getActiveSheet();
 
-    // Auto-create headers if the sheet is completely empty
+    // Auto-create headers if sheet is empty
     if (sheet.getLastRow() === 0) {
       setupSheetHeaders();
     }
 
-    var rawData = e.postData.contents;
-    var data = JSON.parse(rawData);
+    var data = {};
+
+    // 1. Try parsing raw JSON content
+    if (e.postData && e.postData.contents) {
+      try {
+        data = JSON.parse(e.postData.contents);
+      } catch (err) {
+        // If not JSON, check parameters
+      }
+    }
+
+    // 2. If data is still empty or passed via form parameters
+    if (!data.name && e.parameter) {
+      if (e.parameter.postData) {
+        try {
+          data = JSON.parse(e.parameter.postData);
+        } catch (err) {}
+      }
+      if (!data.name) {
+        data = e.parameter;
+      }
+    }
 
     // Initial statuses for order tracking
     var initialPaymentStatus = data.deliveryOption === 'Direct Order' 
@@ -101,7 +119,6 @@ function doPost(e) {
       ""                                                                     // P: Tracking / Waybill No
     ]);
 
-    // Return success response
     return ContentService.createTextOutput(
       JSON.stringify({ 
         status: "success", 
@@ -122,7 +139,7 @@ function doPost(e) {
 
 /**
  * Handle GET requests — Supports Order Tracking Lookup
- * e.g., https://script.google.com/.../exec?track=LMS-123456
+ * Example usage: https://script.google.com/.../exec?track=LMS-123456
  */
 function doGet(e) {
   var trackRef = e.parameter && e.parameter.track;
@@ -131,7 +148,7 @@ function doGet(e) {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = sheet.getDataRange().getValues();
     
-    // Search for order reference in Column A (index 0)
+    // Search for order reference in Column A
     for (var i = 1; i < data.length; i++) {
       if (String(data[i][0]).trim().toUpperCase() === String(trackRef).trim().toUpperCase()) {
         return ContentService.createTextOutput(JSON.stringify({
