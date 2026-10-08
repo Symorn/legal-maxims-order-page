@@ -1,0 +1,6 @@
+{
+  "name": "Legal Maxims Simplified - Official Book Order Page",
+  "description": "Order 'Legal Maxims Simplified: A Practical Guide for Everyone' by Sharon O. Olaniyi with Foreword by Prof. Mojeed Olujinmi Alabi. Explore maxims, read sample chapters, and order paperback, hardcover, or digital editions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
