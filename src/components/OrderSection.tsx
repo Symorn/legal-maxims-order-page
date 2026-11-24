@@ -279,7 +279,7 @@ export const OrderSection: React.FC<OrderSectionProps> = ({ onOpenSample }) => {
                       type="text"
                       value={inscriptionNote}
                       onChange={(e) => setInscriptionNote(e.target.value)}
-                      placeholder="e.g. 'To Barrister Tunde, with best wishes!'"
+                      placeholder="e.g. 'To Tunde A., Esq., with best wishes!'"
                       className="mt-2 w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-hidden focus:border-orange-500"
                     />
                   )}
@@ -375,7 +375,7 @@ export const OrderSection: React.FC<OrderSectionProps> = ({ onOpenSample }) => {
                     type="text"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="e.g. Barrister Sharon Adeleke"
+                    placeholder="e.g. Sharon Adeleke, Esq."
                     className={`w-full bg-[#181a24] border rounded-xl pl-10 pr-4 py-2 text-sm text-white placeholder-zinc-500 focus:outline-hidden focus:border-orange-500 ${
                       formErrors.name ? 'border-red-500' : 'border-zinc-700'
                     }`}

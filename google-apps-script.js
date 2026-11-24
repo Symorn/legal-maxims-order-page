@@ -100,9 +100,10 @@ function doPost(e) {
     }
 
     // Initial statuses for order tracking
-    var initialPaymentStatus = data.deliveryOption === 'Direct Order' 
+    var isDirect = data.deliveryOption && (String(data.deliveryOption).indexOf("Direct") !== -1);
+    var initialPaymentStatus = isDirect 
       ? "Pending Full Confirmation" 
-      : "Pending ₦5k Delivery Fee";
+      : "Pending ₦5,000 Commitment Deposit";
     var initialDeliveryStatus = "Processing Order";
 
     // Append single order row

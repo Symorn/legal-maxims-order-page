@@ -45,11 +45,11 @@ export const BOOK_INFO = {
 export const EDITIONS: BookEdition[] = [
   {
     id: "paperback",
-    name: "Standard Paperback Edition",
+    name: "Standard Hardcopy Edition",
     format: "Paperback",
-    badge: "Most Popular",
-    price: 8500,
-    originalPrice: 10000,
+    badge: "Special Offer • Free Delivery",
+    price: 15000,
+    originalPrice: 20000,
     description: "High quality matte black softcover with crisp acid-free cream pages. Portable, durable, and designed for rigorous classroom and courtroom study.",
     features: [
       "Full 343+ page comprehensive text",
@@ -57,7 +57,7 @@ export const EDITIONS: BookEdition[] = [
       "Relatable Nigerian & common law case illustrations",
       "Subject index (Contracts, Criminal, Tort, Equity, etc.)",
       "Foreword by Prof. Mojeed Olujinmi Alabi",
-      "Eligible for nationwide doorstep delivery"
+      "Free doorstep delivery across Nigeria (Special Offer)"
     ],
     inStock: true,
     isPopular: true
@@ -162,13 +162,13 @@ export const NIGERIAN_STATES = [
 ];
 
 export const BANK_DETAILS = {
-  bankName: "Guaranty Trust Bank (GTBank)",
-  accountName: "LEX MENTORS / ELEGRAPH PUBLISHING",
-  accountNumber: "0245891334",
+  bankName: "Moniepoint MFB",
+  accountName: "Sharon Olaniyi",
+  accountNumber: "7039938934",
   secondaryBank: {
-    bankName: "Zenith Bank Plc",
-    accountName: "SHARON OLANIYI",
-    accountNumber: "2201948371",
+    bankName: "Opay",
+    accountName: "Sharon Olaniyi",
+    accountNumber: "6140343865",
   }
 };
 
@@ -421,7 +421,7 @@ export const TESTIMONIALS = [
     rating: 5
   },
   {
-    name: "Barrister Folashade Alabi, LL.M",
+    name: "Folashade Alabi, LL.M, Esq.",
     role: "Managing Partner & Commercial Litigator",
     institution: "Lagos Bar Association",
     comment: "As litigators, we cite maxims to sharpen our submissions and persuade judges. What makes this book unique is the clarity of each illustration—no fluff, no needless legalese. Prof. Mojeed Alabi's foreword is spot on: it is a companion well worth every kobo.",
@@ -436,7 +436,7 @@ export const TESTIMONIALS = [
   },
   {
     name: "Amina Yusuf",
-    role: "LEX Mentors Community Member & Aspiring Barrister",
+    role: "LEX Mentors Community Member & Aspiring Legal Practitioner",
     institution: "Ahmadu Bello University (ABU Zaria)",
     comment: "The practical guide format is revolutionary. Reading the breakdown of 'Nemo dat quod non habet' and 'Audi alteram partem' made me fall in love with legal philosophy. A must-have for every law fresher and law library.",
     rating: 5
