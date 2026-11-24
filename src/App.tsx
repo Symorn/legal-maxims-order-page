@@ -326,26 +326,26 @@ export default function App() {
   const currentAlert = activeAlertIndex !== null ? RECENT_PURCHASES[activeAlertIndex] : null;
 
   return (
-    <div className="min-h-screen bg-[#0a0b10] text-zinc-100 font-['Montserrat',sans-serif] selection:bg-orange-600 selection:text-white flex flex-col antialiased">
+    <div className="min-h-screen bg-[#0a0b10] text-zinc-100 font-['Montserrat',sans-serif] selection:bg-orange-600 selection:text-white flex flex-col antialiased w-full overflow-x-hidden">
 
       {/* Top Header */}
-      <header className="border-b-2 border-zinc-800 bg-[#12141f] py-4 px-4 sm:px-6 sticky top-0 z-30 shadow-xl">
-        <div className={`mx-auto flex items-center justify-between ${currentPage === 'payment' ? 'max-w-6xl' : 'max-w-4xl'}`}>
-          <div>
-            <h1 className="font-extrabold text-base sm:text-xl tracking-wider text-white">
+      <header className="border-b-2 border-zinc-800 bg-[#12141f] py-4 px-3.5 sm:px-6 sticky top-0 z-30 shadow-xl w-full">
+        <div className={`mx-auto flex items-center justify-between gap-3 ${currentPage === 'payment' ? 'max-w-6xl' : 'max-w-4xl'}`}>
+          <div className="min-w-0">
+            <h1 className="font-extrabold text-base sm:text-xl tracking-wider text-white truncate">
               LEGAL MAXIMS SIMPLIFIED
             </h1>
-            <p className="text-xs text-orange-400 font-bold">
+            <p className="text-xs text-orange-400 font-bold truncate">
               Official Book Order Portal
             </p>
           </div>
-          <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/30 font-bold hidden sm:inline-block">
+          <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/30 font-bold hidden sm:inline-block shrink-0">
             ✓ Nationwide Free Delivery Active
           </span>
         </div>
       </header>
 
-      <main className={`flex-1 mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 ${currentPage === 'payment' ? 'max-w-6xl pb-28 md:pb-12' : 'max-w-4xl'} space-y-8`}>
+      <main className={`flex-1 mx-auto w-full px-3.5 sm:px-6 py-6 sm:py-10 ${currentPage === 'payment' ? 'max-w-6xl' : 'max-w-4xl'} space-y-8 min-w-0`}>
 
         {/* ======================================================== */}
         {/* VIEW 1: MAIN ORDER PAGE                                  */}
@@ -354,10 +354,10 @@ export default function App() {
           <div className="space-y-10 animate-in fade-in duration-300">
 
             {/* Book Showcase Card */}
-            <div className="bg-[#141624] border-2 border-zinc-700/80 rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
+            <div className="bg-[#141624] border-2 border-zinc-700/80 rounded-3xl p-4 sm:p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 sm:gap-8 shadow-2xl overflow-hidden">
 
               {/* Exact Book Cover Image */}
-              <div className="w-64 sm:w-72 shrink-0">
+              <div className="w-52 xs:w-60 sm:w-72 max-w-full shrink-0">
                 <div className="rounded-2xl overflow-hidden border-2 border-zinc-600 shadow-[0_16px_40px_rgba(0,0,0,0.9)] bg-black">
                   <img
                     src={bookCoverImg}
@@ -369,50 +369,50 @@ export default function App() {
               </div>
 
               {/* Book Information */}
-              <div className="space-y-4 text-center md:text-left flex-1">
+              <div className="space-y-4 text-center md:text-left flex-1 min-w-0">
                 <div className="inline-block bg-orange-950 text-orange-300 font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full border border-orange-500/50">
                   ISBN: 978-978-68-2634-9
                 </div>
 
                 <div>
-                  <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight tracking-tight break-words">
                     LEGAL MAXIMS SIMPLIFIED
                   </h2>
-                  <p className="text-orange-400 font-bold text-lg sm:text-xl mt-1">
+                  <p className="text-orange-400 font-bold text-base sm:text-xl mt-1 break-words">
                     A Practical Guide For Everyone
                   </p>
                 </div>
 
-                <div className="text-sm sm:text-base text-zinc-100 space-y-1.5 bg-[#1b1e30] p-4 rounded-2xl border border-zinc-700">
+                <div className="text-sm sm:text-base text-zinc-100 space-y-1.5 bg-[#1b1e30] p-3.5 sm:p-4 rounded-2xl border border-zinc-700 break-words">
                   <p><strong className="text-white">Author:</strong> Sharon O. Olaniyi</p>
                   <p><strong className="text-white">Foreword:</strong> Professor Mojeed Olujinmi Alabi</p>
                 </div>
 
-                <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-medium">
+                <p className="text-sm sm:text-lg text-zinc-200 leading-relaxed font-medium break-words">
                   Centuries of Latin jurisprudence distilled into plain English with everyday Nigerian courtroom applications and relatable examples.
                 </p>
 
                 {/* Key Bullet Features */}
                 <div className="space-y-3 pt-2 text-sm sm:text-base text-zinc-200 font-medium">
-                  <div className="p-3.5 rounded-2xl bg-orange-950/50 border-2 border-orange-500/60 flex items-center gap-3.5 shadow-md">
-                    <Check className="w-6 h-6 text-orange-400 stroke-[3] shrink-0" />
-                    <div>
-                      <p className="text-base sm:text-lg font-black text-white">
+                  <div className="p-3.5 rounded-2xl bg-orange-950/50 border-2 border-orange-500/60 flex items-start sm:items-center gap-3.5 shadow-md min-w-0">
+                    <Check className="w-6 h-6 text-orange-400 stroke-[3] shrink-0 mt-0.5 sm:mt-0" />
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-base sm:text-lg font-black text-white break-words">
                         Over 1,100+ Legal Maxims Included
                       </p>
-                      <p className="text-xs sm:text-sm text-zinc-300 font-normal">
+                      <p className="text-xs sm:text-sm text-zinc-300 font-normal break-words">
                         Exhaustive A–Z coverage across 10 distinct subject areas of Nigerian law.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 text-left">
                     <Check className="w-5 h-5 text-emerald-400 stroke-[3] shrink-0" />
-                    <span>Plain English translations for every single maxim</span>
+                    <span className="break-words">Plain English translations for every single maxim</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 text-left">
                     <Check className="w-5 h-5 text-emerald-400 stroke-[3] shrink-0" />
-                    <span>Real-life Nigerian case scenarios & practical illustrations</span>
+                    <span className="break-words">Real-life Nigerian case scenarios & practical illustrations</span>
                   </div>
                 </div>
               </div>
@@ -421,7 +421,7 @@ export default function App() {
             {/* STEP 1: CHOOSE FORMAT */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black">1</span>
+                <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black shrink-0">1</span>
                 <h3 className="text-xl sm:text-2xl font-black text-white">
                   Choose Which Format You Want:
                 </h3>
@@ -432,28 +432,30 @@ export default function App() {
                 {/* Hard Copy Card */}
                 <div
                   onClick={() => handleSelectBookType('hard')}
-                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${bookType === 'hard'
+                  className={`p-4 sm:p-6 rounded-2xl border-3 cursor-pointer transition flex flex-col justify-between ${bookType === 'hard'
                       ? 'bg-[#1a1d30] border-orange-500 shadow-2xl'
                       : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
                     }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h4 className="font-black text-lg sm:text-xl text-white">Hard Copy (Physical Book)</h4>
-                      <p className="text-sm text-zinc-300 mt-1 font-medium">Printed book delivered directly to your doorstep anywhere in Nigeria.</p>
-                    </div>
-                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'hard' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
-                      }`}>
-                      {bookType === 'hard' && <Check className="w-4 h-4 stroke-[3]" />}
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h4 className="font-black text-lg sm:text-xl text-white break-words">Hard Copy (Physical Book)</h4>
+                        <p className="text-sm text-zinc-300 mt-1 font-medium break-words">Printed book delivered directly to your doorstep anywhere in Nigeria.</p>
+                      </div>
+                      <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'hard' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
+                        }`}>
+                        {bookType === 'hard' && <Check className="w-4 h-4 stroke-[3]" />}
+                      </div>
                     </div>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-zinc-700 text-sm sm:text-base space-y-2">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center gap-2 flex-wrap">
                       <span className="text-zinc-300 font-medium">Book Price:</span>
-                      <span className="font-extrabold text-white text-lg">₦15,000 / copy</span>
+                      <span className="font-extrabold text-white text-base sm:text-lg">₦15,000 / copy</span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center gap-2 flex-wrap">
                       <span className="text-zinc-300 font-medium">Nationwide Delivery:</span>
                       <span className="text-emerald-400 font-black text-xs sm:text-sm flex items-center gap-1 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
                         FREE (Special Promo Offer)
@@ -465,26 +467,28 @@ export default function App() {
                 {/* Soft Copy Card */}
                 <div
                   onClick={() => handleSelectBookType('soft')}
-                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${bookType === 'soft'
+                  className={`p-4 sm:p-6 rounded-2xl border-3 cursor-pointer transition flex flex-col justify-between ${bookType === 'soft'
                       ? 'bg-[#1a1d30] border-orange-500 shadow-2xl'
                       : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
                     }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h4 className="font-black text-lg sm:text-xl text-white">Soft Copy — Read Online</h4>
-                      <p className="text-sm text-zinc-300 mt-1 font-medium">Instant access to read on your smartphone, tablet, or laptop via Selar.</p>
-                    </div>
-                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'soft' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
-                      }`}>
-                      {bookType === 'soft' && <Check className="w-4 h-4 stroke-[3]" />}
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h4 className="font-black text-lg sm:text-xl text-white break-words">Soft Copy — Read Online</h4>
+                        <p className="text-sm text-zinc-300 mt-1 font-medium break-words">Instant access to read on your smartphone, tablet, or laptop via Selar.</p>
+                      </div>
+                      <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'soft' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
+                        }`}>
+                        {bookType === 'soft' && <Check className="w-4 h-4 stroke-[3]" />}
+                      </div>
                     </div>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-zinc-700 text-sm sm:text-base space-y-2">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center gap-2 flex-wrap">
                       <span className="text-zinc-300 font-medium">Price:</span>
-                      <span className="font-extrabold text-orange-400 text-2xl">₦5,000</span>
+                      <span className="font-extrabold text-orange-400 text-xl sm:text-2xl">₦5,000</span>
                     </div>
                     <p className="text-emerald-400 text-sm font-bold">
                       ✓ Instant Access (Zero shipping fee)
@@ -497,17 +501,17 @@ export default function App() {
 
             {/* IF SOFT COPY: BIG SELAR BUTTON */}
             {bookType === 'soft' && (
-              <div className="bg-[#141624] border-2 border-orange-500 rounded-3xl p-8 sm:p-10 space-y-6 text-center sm:text-left shadow-2xl">
-                <div className="flex flex-col sm:flex-row items-center gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-orange-600 text-white flex items-center justify-center shrink-0 shadow-lg">
-                    <BookOpen className="w-8 h-8" />
+              <div className="bg-[#141624] border-2 border-orange-500 rounded-3xl p-5 sm:p-8 md:p-10 space-y-6 text-center sm:text-left shadow-2xl overflow-hidden">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-orange-600 text-white flex items-center justify-center shrink-0 shadow-lg">
+                    <BookOpen className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                  <div className="min-w-0">
+                    <h3 className="text-xl sm:text-2xl font-black text-white break-words">
                       Read Online (Instant Access)
                     </h3>
-                    <p className="text-base sm:text-lg text-zinc-200 mt-1">
-                      Price: <strong className="text-orange-400 text-xl font-bold">₦5,000</strong>. Click the button below to read immediately.
+                    <p className="text-sm sm:text-base md:text-lg text-zinc-200 mt-1 break-words">
+                      Price: <strong className="text-orange-400 text-lg sm:text-xl font-bold">₦5,000</strong>. Click the button below to read immediately.
                     </p>
                   </div>
                 </div>
@@ -518,11 +522,11 @@ export default function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleSoftCopyClick}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 py-5 px-10 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-lg sm:text-xl shadow-2xl transition transform active:scale-95"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 sm:gap-3 py-4 sm:py-5 px-5 sm:px-10 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-black text-base sm:text-xl shadow-2xl transition transform active:scale-95 text-center flex-wrap"
                   >
-                    <BookOpen className="w-6 h-6" />
-                    <span>Click Here to Read Online (₦5,000)</span>
-                    <ExternalLink className="w-5 h-5 ml-1" />
+                    <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
+                    <span className="break-words">Click Here to Read Online (₦5,000)</span>
+                    <ExternalLink className="w-5 h-5 shrink-0" />
                   </a>
                 </div>
               </div>
@@ -530,35 +534,35 @@ export default function App() {
 
             {/* IF HARD COPY: ORDER FORM */}
             {bookType === 'hard' && (
-              <form onSubmit={handleSubmitOrder} className="bg-[#141624] border-2 border-zinc-700 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+              <form onSubmit={handleSubmitOrder} className="bg-[#141624] border-2 border-zinc-700 rounded-3xl p-4 sm:p-8 md:p-10 space-y-8 shadow-2xl overflow-hidden">
 
                 {/* STEP 2: QUANTITY & BULK DISCOUNT */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black">2</span>
+                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black shrink-0">2</span>
                     <h3 className="text-xl sm:text-2xl font-black text-white">
                       Select Number of Copies:
                     </h3>
                   </div>
 
-                  <div className="bg-[#1b1e32] p-5 sm:p-6 rounded-2xl border-2 border-zinc-600 space-y-4">
+                  <div className="bg-[#1b1e32] p-4 sm:p-6 rounded-2xl border-2 border-zinc-600 space-y-4 overflow-hidden">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div>
-                        <label className="text-base sm:text-lg font-bold text-white block">
+                      <div className="min-w-0">
+                        <label className="text-base sm:text-lg font-bold text-white block break-words">
                           How many copies do you need?
                         </label>
-                        <p className="text-sm text-zinc-300 mt-0.5">
+                        <p className="text-xs sm:text-sm text-zinc-300 mt-0.5 break-words">
                           Standard price is ₦15,000 per copy with FREE delivery nationwide. 5 copies and above attract a 30% discount!
                         </p>
                       </div>
 
                       {/* Stepper Buttons */}
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                         <button
                           type="button"
                           onClick={() => handleQuantityChange(quantity - 1)}
                           disabled={quantity <= 1}
-                          className="w-12 h-12 rounded-2xl bg-zinc-800 hover:bg-zinc-700 text-white font-extrabold text-xl flex items-center justify-center disabled:opacity-40 transition cursor-pointer border border-zinc-600"
+                          className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-zinc-800 hover:bg-zinc-700 text-white font-extrabold text-xl flex items-center justify-center disabled:opacity-40 transition cursor-pointer border border-zinc-600 shrink-0"
                         >
                           <Minus className="w-5 h-5 stroke-[3]" />
                         </button>
@@ -569,13 +573,13 @@ export default function App() {
                           max="100"
                           value={quantity}
                           onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                          className="w-20 h-12 bg-[#0d0e17] border-2 border-orange-500 rounded-2xl text-center text-xl font-black text-white focus:outline-hidden"
+                          className="w-16 sm:w-20 h-11 sm:h-12 bg-[#0d0e17] border-2 border-orange-500 rounded-2xl text-center text-lg sm:text-xl font-black text-white focus:outline-hidden"
                         />
 
                         <button
                           type="button"
                           onClick={() => handleQuantityChange(quantity + 1)}
-                          className="w-12 h-12 rounded-2xl bg-zinc-800 hover:bg-zinc-700 text-white font-extrabold text-xl flex items-center justify-center transition cursor-pointer border border-zinc-600"
+                          className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-zinc-800 hover:bg-zinc-700 text-white font-extrabold text-xl flex items-center justify-center transition cursor-pointer border border-zinc-600 shrink-0"
                         >
                           <Plus className="w-5 h-5 stroke-[3]" />
                         </button>
@@ -583,14 +587,14 @@ export default function App() {
                     </div>
 
                     {/* Discount Tier Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-center text-sm font-bold">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2 text-center text-sm font-bold">
                       {/* 1 - 4 Copies */}
                       <button
                         type="button"
                         onClick={() => {
                           if (quantity >= 5) handleQuantityChange(1);
                         }}
-                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${quantity < 5
+                        className={`p-3.5 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] min-w-0 ${quantity < 5
                             ? 'bg-[#1e2238] border-orange-500 shadow-lg ring-2 ring-orange-500/30 text-white'
                             : 'bg-[#121422] border-zinc-700 hover:border-zinc-500 text-zinc-400'
                           }`}
@@ -599,8 +603,8 @@ export default function App() {
                           <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-orange-500" />
                         )}
                         <p className="text-xs uppercase font-extrabold tracking-wider text-zinc-300">1 – 4 Copies</p>
-                        <p className="text-xl text-white font-black my-1.5">₦15,000 / copy</p>
-                        <p className="text-xs text-emerald-400 font-semibold">Standard Price • Free Delivery Nationwide</p>
+                        <p className="text-lg sm:text-xl text-white font-black my-1.5">₦15,000 / copy</p>
+                        <p className="text-xs text-emerald-400 font-semibold break-words">Standard Price • Free Delivery Nationwide</p>
                       </button>
 
                       {/* 5+ Copies (30% Discount) */}
@@ -609,7 +613,7 @@ export default function App() {
                         onClick={() => {
                           if (quantity < 5) handleQuantityChange(5);
                         }}
-                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${quantity >= 5
+                        className={`p-3.5 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] min-w-0 ${quantity >= 5
                             ? 'bg-emerald-950/90 border-emerald-500 shadow-lg ring-2 ring-emerald-500/30 text-emerald-200'
                             : 'bg-[#121422] border-zinc-700 hover:border-emerald-600/50 text-zinc-400'
                           }`}
@@ -623,21 +627,21 @@ export default function App() {
                           </span>
                           <p className="text-xs uppercase font-extrabold tracking-wider text-emerald-300">5+ Copies</p>
                         </div>
-                        <p className="text-xl text-emerald-400 font-black my-1.5">30% DISCOUNT</p>
-                        <p className="text-xs text-emerald-200 font-semibold">₦10,500 / copy (Save ₦4,500/copy • Free Delivery)</p>
+                        <p className="text-lg sm:text-xl text-emerald-400 font-black my-1.5">30% DISCOUNT</p>
+                        <p className="text-xs text-emerald-200 font-semibold break-words">₦10,500 / copy (Save ₦4,500/copy • Free Delivery)</p>
                       </button>
                     </div>
 
                     {/* Active Savings Alert */}
                     {discountPercent > 0 && (
-                      <div className="p-4 rounded-xl bg-emerald-900/60 border-2 border-emerald-500 text-emerald-100 font-semibold flex items-center justify-between text-sm sm:text-base">
-                        <div className="flex items-center gap-2.5">
+                      <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-900/60 border-2 border-emerald-500 text-emerald-100 font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm sm:text-base">
+                        <div className="flex items-center gap-2.5 min-w-0">
                           <Tag className="w-5 h-5 text-emerald-300 shrink-0" />
-                          <span>
+                          <span className="break-words">
                             <strong>{discountPercent}% Bulk Discount Applied!</strong> You save ₦{discountAmount.toLocaleString()} (₦10,500/copy).
                           </span>
                         </div>
-                        <span className="font-extrabold text-white text-base sm:text-lg">
+                        <span className="font-extrabold text-white text-base sm:text-lg sm:text-right shrink-0">
                           ₦{discountedBookTotal.toLocaleString()}
                         </span>
                       </div>
@@ -648,7 +652,7 @@ export default function App() {
                 {/* STEP 3: CONTACT & DELIVERY DETAILS */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black">3</span>
+                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black shrink-0">3</span>
                     <h3 className="text-xl sm:text-2xl font-black text-white">
                       Enter Your Delivery Details:
                     </h3>
@@ -664,7 +668,7 @@ export default function App() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your full name"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.name ? 'border-red-500' : 'border-zinc-600'
+                        className={`w-full max-w-full bg-[#1b1e32] border-2 rounded-2xl px-3.5 sm:px-4 py-3 sm:py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.name ? 'border-red-500' : 'border-zinc-600'
                           }`}
                       />
                       {errors.name && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.name}</p>}
@@ -679,7 +683,7 @@ export default function App() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email address"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.email ? 'border-red-500' : 'border-zinc-600'
+                        className={`w-full max-w-full bg-[#1b1e32] border-2 rounded-2xl px-3.5 sm:px-4 py-3 sm:py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.email ? 'border-red-500' : 'border-zinc-600'
                           }`}
                       />
                       {errors.email && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.email}</p>}
@@ -694,7 +698,7 @@ export default function App() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. 08012345678"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.phone ? 'border-red-500' : 'border-zinc-600'
+                        className={`w-full max-w-full bg-[#1b1e32] border-2 rounded-2xl px-3.5 sm:px-4 py-3 sm:py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.phone ? 'border-red-500' : 'border-zinc-600'
                           }`}
                       />
                       {errors.phone && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.phone}</p>}
@@ -709,7 +713,7 @@ export default function App() {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder="Enter your house or office address, city, and state"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.address ? 'border-red-500' : 'border-zinc-600'
+                        className={`w-full max-w-full bg-[#1b1e32] border-2 rounded-2xl px-3.5 sm:px-4 py-3 sm:py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.address ? 'border-red-500' : 'border-zinc-600'
                           }`}
                       />
                       {errors.address && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.address}</p>}
@@ -720,7 +724,7 @@ export default function App() {
                 {/* STEP 4: PAYMENT OPTION */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black">4</span>
+                    <span className="w-8 h-8 rounded-full bg-orange-600 text-white text-base flex items-center justify-center font-black shrink-0">4</span>
                     <h3 className="text-xl sm:text-2xl font-black text-white">
                       Select Order Option:
                     </h3>
@@ -729,96 +733,100 @@ export default function App() {
                   <div className="space-y-3.5">
                     {/* Option 1: Direct order */}
                     <label
-                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${deliveryOption === 'direct'
+                      className={`p-4 sm:p-5 rounded-2xl border-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer transition ${deliveryOption === 'direct'
                           ? 'bg-[#1b1e32] border-orange-500 shadow-xl'
                           : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
                         }`}
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-3 sm:gap-4 min-w-0">
                         <input
                           type="radio"
                           name="delivery_opt"
                           checked={deliveryOption === 'direct'}
                           onChange={() => setDeliveryOption('direct')}
-                          className="accent-orange-600 w-5 h-5 mt-1"
+                          className="accent-orange-600 w-5 h-5 mt-1 shrink-0"
                         />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <p className="font-black text-base sm:text-lg text-white">Direct Order (Full Payment)</p>
-                            <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-black text-base sm:text-lg text-white break-words">Direct Order (Full Payment)</p>
+                            <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
                               Recommended
                             </span>
                           </div>
-                          <p className="text-sm text-zinc-300 mt-1">
+                          <p className="text-xs sm:text-sm text-zinc-300 mt-1 break-words">
                             ₦{discountedBookTotal.toLocaleString()} ({quantity} {quantity > 1 ? 'copies' : 'copy'}) • Free Nationwide Doorstep Delivery
                           </p>
                         </div>
                       </div>
-                      <span className="text-lg sm:text-xl font-black text-orange-400 shrink-0">
-                        ₦{grandTotal.toLocaleString()} Total
-                      </span>
+                      <div className="pl-8 sm:pl-0 sm:text-right shrink-0">
+                        <span className="text-base sm:text-xl font-black text-orange-400 font-mono">
+                          ₦{grandTotal.toLocaleString()} Total
+                        </span>
+                      </div>
                     </label>
 
                     {/* Option 2: Pay on delivery */}
                     <label
-                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${deliveryOption === 'pod'
+                      className={`p-4 sm:p-5 rounded-2xl border-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer transition ${deliveryOption === 'pod'
                           ? 'bg-[#1b1e32] border-orange-500 shadow-xl'
                           : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
                         }`}
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-3 sm:gap-4 min-w-0">
                         <input
                           type="radio"
                           name="delivery_opt"
                           checked={deliveryOption === 'pod'}
                           onChange={() => setDeliveryOption('pod')}
-                          className="accent-orange-600 w-5 h-5 mt-1"
+                          className="accent-orange-600 w-5 h-5 mt-1 shrink-0"
                         />
-                        <div>
-                          <p className="font-black text-base sm:text-lg text-white">Pay on Delivery</p>
-                          <p className="text-sm text-amber-200 mt-1 font-medium">
+                        <div className="min-w-0">
+                          <p className="font-black text-base sm:text-lg text-white break-words">Pay on Delivery</p>
+                          <p className="text-xs sm:text-sm text-amber-200 mt-1 font-medium break-words">
                             Pay ₦5,000 commitment deposit now to dispatch. Pay balance of ₦{balanceOnDelivery.toLocaleString()} upon arrival.
                           </p>
                         </div>
                       </div>
-                      <span className="text-lg sm:text-xl font-black text-white shrink-0">
-                        ₦5,000 Now
-                      </span>
+                      <div className="pl-8 sm:pl-0 sm:text-right shrink-0">
+                        <span className="text-base sm:text-xl font-black text-white font-mono">
+                          ₦5,000 Now
+                        </span>
+                      </div>
                     </label>
                   </div>
 
                   {/* NOTICE ABOUT PAY ON DELIVERY POLICY & SPECIAL OFFER */}
-                  <div className="bg-amber-950/70 border-2 border-amber-500 p-5 sm:p-6 rounded-2xl text-sm sm:text-base text-amber-100 space-y-3.5 shadow-xl">
+                  <div className="bg-amber-950/70 border-2 border-amber-500 p-4 sm:p-6 rounded-2xl text-sm sm:text-base text-amber-100 space-y-3.5 shadow-xl break-words overflow-hidden">
                     <div className="flex items-center gap-2.5 text-amber-300 font-black text-base sm:text-lg border-b border-amber-500/40 pb-2.5">
                       <ShieldCheck className="w-6 h-6 text-amber-400 shrink-0" />
-                      <span>Notice: Special Offer & Pay on Delivery Policy</span>
+                      <span className="break-words">Notice: Special Offer & Pay on Delivery Policy</span>
                     </div>
 
-                    <div className="space-y-2.5 text-sm sm:text-base leading-relaxed">
+                    <div className="space-y-2.5 text-xs sm:text-base leading-relaxed">
                       <div className="flex items-start gap-2.5">
                         <span className="text-emerald-400 font-black text-base shrink-0 mt-0.5">✓</span>
-                        <div>
+                        <div className="min-w-0">
                           <strong className="text-white">Special Promo Offer:</strong> We have an active offer of <strong className="text-emerald-300 uppercase">Free Delivery Nationwide</strong> across all Nigerian states. The cost of the hardcopy book is now <strong>₦15,000</strong> per copy.
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2.5">
                         <span className="text-amber-400 font-black text-base shrink-0 mt-0.5">⚠️</span>
-                        <div>
+                        <div className="min-w-0">
                           <strong className="text-white">Pay on Delivery Policy:</strong> For customers who choose <strong>Pay on Delivery</strong>, a mandatory commitment fee/deposit of <strong>₦5,000 is required upfront</strong> before your parcel is packaged and dispatched.
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2.5">
                         <span className="text-orange-400 font-black text-base shrink-0 mt-0.5">•</span>
-                        <div>
+                        <div className="min-w-0">
                           <strong className="text-white">Why is this required?</strong> This upfront payment confirms your order seriousness and protects against dispatch failures and uncollected courier deliveries.
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2.5">
                         <span className="text-emerald-400 font-black text-base shrink-0 mt-0.5">•</span>
-                        <div>
+                        <div className="min-w-0">
                           <strong className="text-white">Deducted from Total:</strong> The ₦5,000 is credited to your order. You only pay the balance of <strong className="text-white font-mono">₦{balanceOnDelivery.toLocaleString()}</strong> to the rider when the book reaches your hands.
                         </div>
                       </div>
@@ -831,38 +839,38 @@ export default function App() {
                 </div>
 
                 {/* COST BREAKDOWN SUMMARY */}
-                <div className="bg-black/80 p-6 rounded-2xl border-2 border-zinc-700 space-y-3">
-                  <div className="flex justify-between text-sm sm:text-base text-zinc-200 font-medium">
+                <div className="bg-black/80 p-4 sm:p-6 rounded-2xl border-2 border-zinc-700 space-y-3 overflow-hidden">
+                  <div className="flex justify-between items-center gap-2 flex-wrap text-sm sm:text-base text-zinc-200 font-medium">
                     <span>Book Cost ({quantity} {quantity > 1 ? 'copies' : 'copy'}):</span>
                     <span className="font-bold">₦{rawBookTotal.toLocaleString()}</span>
                   </div>
 
                   {discountPercent > 0 && (
-                    <div className="flex justify-between text-sm sm:text-base text-emerald-400 font-bold">
+                    <div className="flex justify-between items-center gap-2 flex-wrap text-sm sm:text-base text-emerald-400 font-bold">
                       <span>Bulk Discount ({discountPercent}% OFF):</span>
                       <span>-₦{discountAmount.toLocaleString()}</span>
                     </div>
                   )}
 
-                  <div className="flex justify-between text-sm sm:text-base text-zinc-200 font-medium">
+                  <div className="flex justify-between items-center gap-2 flex-wrap text-sm sm:text-base text-zinc-200 font-medium">
                     <span>Nationwide Doorstep Delivery:</span>
                     <span className="font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/40 text-xs sm:text-sm">
                       FREE (Special Offer)
                     </span>
                   </div>
 
-                  <div className="border-t-2 border-zinc-700 pt-3 flex items-center justify-between">
-                    <div>
-                      <p className="text-sm sm:text-base text-zinc-300 font-bold">
+                  <div className="border-t-2 border-zinc-700 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-sm sm:text-base text-zinc-300 font-bold break-words">
                         {deliveryOption === 'direct' ? 'Total Amount Payable Now:' : 'Amount Required Now to Dispatch:'}
                       </p>
                       {deliveryOption === 'pod' && (
-                        <p className="text-xs sm:text-sm text-amber-300 font-semibold mt-0.5">
+                        <p className="text-xs sm:text-sm text-amber-300 font-semibold mt-0.5 break-words">
                           Balance to pay on delivery: <strong>₦{balanceOnDelivery.toLocaleString()}</strong>
                         </p>
                       )}
                     </div>
-                    <p className="text-3xl sm:text-4xl font-black text-orange-400">
+                    <p className="text-2xl sm:text-4xl font-black text-orange-400 font-mono shrink-0">
                       ₦{amountDueNow.toLocaleString()}
                     </p>
                   </div>
@@ -872,17 +880,17 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-5 px-8 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-black text-lg sm:text-xl shadow-2xl transition transform active:scale-98 cursor-pointer flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 sm:py-5 px-4 sm:px-8 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-black text-base sm:text-xl shadow-2xl transition transform active:scale-98 cursor-pointer flex items-center justify-center gap-2.5 sm:gap-3 disabled:opacity-50 text-center flex-wrap sm:flex-nowrap"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-6 h-6 animate-spin" />
-                      <span>Saving Order Details...</span>
+                      <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin shrink-0" />
+                      <span className="break-words">Saving Order Details...</span>
                     </>
                   ) : (
                     <>
-                      <span>Submit Order & Proceed to Payment</span>
-                      <ArrowRight className="w-6 h-6 stroke-[3]" />
+                      <span className="break-words">Submit Order & Proceed to Payment</span>
+                      <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3] shrink-0" />
                     </>
                   )}
                 </button>
@@ -898,7 +906,7 @@ export default function App() {
           <div className="space-y-6 animate-in fade-in duration-300">
 
             {/* Top Navigation Bar: Back link & Order status */}
-            <div className="flex items-center justify-between gap-3 border-b border-zinc-800 pb-3 text-sm sm:text-base">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-zinc-800 pb-3 text-sm sm:text-base">
               <button
                 type="button"
                 onClick={() => {
@@ -907,17 +915,17 @@ export default function App() {
                 }}
                 className="inline-flex items-center gap-1.5 font-bold text-zinc-300 hover:text-white transition cursor-pointer"
               >
-                <ArrowLeft className="w-5 h-5" />
-                <span>← Back to Modify Details</span>
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                <span>Back to Modify Details</span>
               </button>
 
-              <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40 font-bold text-xs sm:text-sm">
-                  <Check className="w-4 h-4 stroke-[3]" />
+              <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm flex-wrap sm:flex-nowrap">
+                <span className="flex items-center gap-1 text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/40 font-bold shrink-0">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
                   <span>Order Saved</span>
                 </span>
-                <span className="text-zinc-600 font-bold">→</span>
-                <span className="flex items-center gap-1.5 text-orange-400 bg-orange-950/80 px-3 py-1 rounded-full border border-orange-500/50 font-bold text-xs sm:text-sm">
+                <span className="text-zinc-600 font-bold shrink-0">→</span>
+                <span className="flex items-center gap-1 text-orange-400 bg-orange-950/80 px-2.5 py-1 rounded-full border border-orange-500/50 font-bold shrink-0">
                   <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
                   <span>Make Payment</span>
                 </span>
@@ -925,14 +933,14 @@ export default function App() {
             </div>
 
             {/* 1. A LITTLE MESSAGE ON WHAT THEY NEED TO DO NEXT */}
-            <div className="bg-gradient-to-r from-orange-950/90 via-[#151829] to-emerald-950/80 border-2 border-orange-500/70 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl flex items-start gap-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-orange-600/30 text-orange-400 flex items-center justify-center shrink-0 border-2 border-orange-500/50 font-black text-2xl shadow-inner">
+            <div className="bg-gradient-to-r from-orange-950/90 via-[#151829] to-emerald-950/80 border-2 border-orange-500/70 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl flex items-start gap-3 sm:gap-4 overflow-hidden">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-orange-600/30 text-orange-400 flex items-center justify-center shrink-0 border-2 border-orange-500/50 font-black text-xl sm:text-2xl shadow-inner mt-0.5">
                 ⚡
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-orange-300 bg-orange-950 px-3 py-1 rounded-full border border-orange-500/40">
-                    Official Order Ref: {orderRef}
+                  <span className="text-[11px] sm:text-sm font-mono font-black uppercase tracking-wider text-orange-300 bg-orange-950 px-2.5 py-1 rounded-full border border-orange-500/40 break-all">
+                    Order Ref: {orderRef}
                   </span>
                   <button
                     type="button"
@@ -942,40 +950,40 @@ export default function App() {
                     {copiedItem === 'ref' ? '✓ Copied Ref!' : 'Copy Ref'}
                   </button>
                 </div>
-                <h2 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2 break-words">
                   What you need to do next to confirm your order:
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed break-words">
                   Please transfer exactly <strong className="text-amber-300 font-mono font-black text-base sm:text-xl">₦{amountDueNow.toLocaleString()}</strong> into either verified bank account below, then tap the green button to send your payment receipt on WhatsApp so your copy can be confirmed and dispatched immediately.
                 </p>
               </div>
             </div>
 
             {/* 2. THEN ACCOUNT OPTIONS */}
-            <div className="bg-[#131627] border-2 border-zinc-600 rounded-2xl sm:rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl">
+            <div className="bg-[#131627] border-2 border-zinc-600 rounded-2xl sm:rounded-3xl p-4 sm:p-7 space-y-5 shadow-2xl overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-700 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-sm shadow-md">
+                  <span className="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-sm shadow-md shrink-0">
                     1
                   </span>
-                  <div>
-                    <h3 className="text-lg sm:text-2xl font-black text-white">
+                  <div className="min-w-0">
+                    <h3 className="text-lg sm:text-2xl font-black text-white break-words">
                       Official Publisher Bank Accounts
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-300 font-medium">
+                    <p className="text-xs sm:text-sm text-zinc-300 font-medium break-words">
                       Transfer into either Moniepoint or Opay below
                     </p>
                   </div>
                 </div>
-                <div className="text-sm sm:text-base text-zinc-200 sm:text-right">
+                <div className="text-sm sm:text-base text-zinc-200 sm:text-right shrink-0">
                   Account Name: <strong className="text-white font-black text-base sm:text-lg underline decoration-orange-500">Sharon Olaniyi</strong>
                 </div>
               </div>
 
               {/* Amount Due Box with 1-Click Copy */}
-              <div className="bg-[#0b0d17] p-4 sm:p-6 rounded-2xl border-2 border-orange-500/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-inner">
-                <div>
-                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-orange-400 block">
+              <div className="bg-[#0b0d17] p-4 sm:p-6 rounded-2xl border-2 border-orange-500/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-inner overflow-hidden">
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-orange-400 block break-words">
                     {deliveryOption === 'direct' ? 'Total Amount To Transfer' : 'Commitment Deposit Required Now (Pay on Delivery)'}
                   </span>
                   <div className="flex items-baseline gap-2 mt-1">
@@ -983,7 +991,7 @@ export default function App() {
                       ₦{amountDueNow.toLocaleString()}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-zinc-200 mt-1 font-medium">
+                  <p className="text-xs sm:text-sm text-zinc-200 mt-1 font-medium break-words">
                     {deliveryOption === 'direct' ? (
                       <span className="text-emerald-400 font-bold">
                         ✓ Full payment for {quantity} {quantity > 1 ? 'copies' : 'copy'} (Free Nationwide Doorstep Delivery included)
@@ -999,7 +1007,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => handleCopy(amountDueNow.toString(), 'amount')}
-                  className={`px-5 py-4 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2 transition cursor-pointer shadow-lg shrink-0 ${
+                  className={`w-full sm:w-auto px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2 transition cursor-pointer shadow-lg shrink-0 ${
                     copiedItem === 'amount'
                       ? 'bg-emerald-600 text-white border-2 border-emerald-400'
                       : 'bg-zinc-800 hover:bg-zinc-700 text-white border-2 border-zinc-600'
@@ -1007,12 +1015,12 @@ export default function App() {
                 >
                   {copiedItem === 'amount' ? (
                     <>
-                      <Check className="w-5 h-5 stroke-[3]" />
+                      <Check className="w-5 h-5 stroke-[3] shrink-0" />
                       <span>Amount Copied (₦{amountDueNow.toLocaleString()})!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-5 h-5" />
+                      <Copy className="w-5 h-5 shrink-0" />
                       <span>Click to Copy Amount</span>
                     </>
                   )}
@@ -1028,27 +1036,27 @@ export default function App() {
                   return (
                     <div
                       key={bank.id}
-                      className={`bg-[#181b30] border-2 rounded-2xl p-5 sm:p-6 space-y-4 shadow-xl transition relative overflow-hidden ${
+                      className={`bg-[#181b30] border-2 rounded-2xl p-4 sm:p-6 space-y-4 shadow-xl transition relative overflow-hidden ${
                         isMoniepoint ? 'border-zinc-600 hover:border-orange-500' : 'border-zinc-600 hover:border-emerald-500'
                       }`}
                     >
-                      <div className="flex items-start justify-between border-b border-zinc-700/80 pb-3">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border-2 ${
+                      <div className="flex items-start justify-between gap-2 border-b border-zinc-700/80 pb-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 border-2 ${
                             isMoniepoint 
                               ? 'bg-orange-600/20 text-orange-400 border-orange-500/50' 
                               : 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
                           }`}>
-                            {isMoniepoint ? <Building2 className="w-6 h-6" /> : <CreditCard className="w-6 h-6" />}
+                            {isMoniepoint ? <Building2 className="w-5 h-5 sm:w-6 sm:h-6" /> : <CreditCard className="w-5 h-5 sm:w-6 sm:h-6" />}
                           </div>
-                          <div>
-                            <span className="text-xs uppercase font-mono font-bold tracking-wider text-zinc-300">
+                          <div className="min-w-0">
+                            <span className="text-[11px] sm:text-xs uppercase font-mono font-bold tracking-wider text-zinc-300 block">
                               {isMoniepoint ? 'Bank Option 1' : 'Bank Option 2'}
                             </span>
-                            <h4 className="text-xl sm:text-2xl font-black text-white">{bank.bankName}</h4>
+                            <h4 className="text-lg sm:text-2xl font-black text-white truncate">{bank.bankName}</h4>
                           </div>
                         </div>
-                        <span className={`text-xs font-bold uppercase px-3 py-1 rounded-full border ${
+                        <span className={`text-[10px] sm:text-xs font-bold uppercase px-2.5 sm:px-3 py-1 rounded-full border shrink-0 ${
                           isMoniepoint 
                             ? 'bg-orange-950 text-orange-300 border-orange-500/40' 
                             : 'bg-emerald-950 text-emerald-300 border-emerald-500/40'
@@ -1058,15 +1066,15 @@ export default function App() {
                       </div>
 
                       {/* High-Legibility Account Number Box */}
-                      <div className="bg-[#090b14] p-4 sm:p-5 rounded-2xl border-2 border-zinc-700 space-y-2">
+                      <div className="bg-[#090b14] p-4 sm:p-5 rounded-2xl border-2 border-zinc-700 space-y-2 overflow-hidden">
                         <div className="flex items-center justify-between text-xs sm:text-sm text-zinc-300 font-semibold">
                           <span className="uppercase tracking-wider">Account Number:</span>
                           <span className="text-zinc-400 font-mono">10 Digits</span>
                         </div>
-                        <p className="font-mono text-3xl sm:text-4xl font-black text-amber-300 tracking-wider py-0.5 select-all">
+                        <p className="font-mono text-2xl sm:text-4xl font-black text-amber-300 tracking-wider py-0.5 select-all break-all">
                           {bank.accountNumber}
                         </p>
-                        <p className="text-sm sm:text-base text-zinc-200 pt-1 font-medium">
+                        <p className="text-sm sm:text-base text-zinc-200 pt-1 font-medium break-words">
                           Account Name: <strong className="text-white text-base sm:text-lg font-bold">{bank.accountName}</strong>
                         </p>
                       </div>
@@ -1074,7 +1082,7 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => handleCopy(bank.accountNumber, bank.id)}
-                        className={`w-full py-4 px-5 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition transform active:scale-98 cursor-pointer shadow-lg ${
+                        className={`w-full py-3.5 sm:py-4 px-4 sm:px-5 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2 transition transform active:scale-98 cursor-pointer shadow-lg ${
                           isCopied
                             ? 'bg-emerald-600 text-white'
                             : isMoniepoint
@@ -1084,13 +1092,13 @@ export default function App() {
                       >
                         {isCopied ? (
                           <>
-                            <Check className="w-5 h-5 stroke-[3]" />
-                            <span>Copied {bank.bankName} ({bank.accountNumber})!</span>
+                            <Check className="w-5 h-5 stroke-[3] shrink-0" />
+                            <span>Copied {bank.bankName} Account!</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="w-5 h-5" />
-                            <span>Click to Copy {bank.bankName} ({bank.accountNumber})</span>
+                            <Copy className="w-5 h-5 shrink-0" />
+                            <span>Copy {bank.bankName} Account</span>
                           </>
                         )}
                       </button>
@@ -1099,49 +1107,49 @@ export default function App() {
                 })}
               </div>
 
-              <div className="text-xs sm:text-sm text-zinc-300 flex items-center gap-2 pt-1 font-medium">
-                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-                <span>All payments are confirmed directly by author Sharon Olaniyi. Waybill details sent on WhatsApp immediately.</span>
+              <div className="text-xs sm:text-sm text-zinc-300 flex items-start sm:items-center gap-2 pt-1 font-medium">
+                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5 sm:mt-0" />
+                <span className="break-words">All payments are confirmed directly by author Sharon Olaniyi. Waybill details sent on WhatsApp immediately.</span>
               </div>
             </div>
 
             {/* 3. RECEIPT SENDING */}
-            <div className="bg-gradient-to-r from-emerald-950 via-[#11241f] to-emerald-950 border-2 border-emerald-500 rounded-2xl sm:rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl relative overflow-hidden">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 text-black flex items-center justify-center shrink-0 shadow-lg font-black text-2xl">
+            <div className="bg-gradient-to-r from-emerald-950 via-[#11241f] to-emerald-950 border-2 border-emerald-500 rounded-2xl sm:rounded-3xl p-4 sm:p-7 space-y-5 shadow-2xl relative overflow-hidden">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 text-black flex items-center justify-center shrink-0 shadow-lg font-black text-xl sm:text-2xl mt-0.5">
                   ✓
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-xl bg-emerald-500 text-black flex items-center justify-center font-black text-xs">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="w-7 h-7 rounded-xl bg-emerald-500 text-black flex items-center justify-center font-black text-xs shrink-0">
                       2
                     </span>
                     <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300 bg-emerald-900/90 px-3 py-1 rounded-full border border-emerald-400/40 animate-pulse">
                       Required Action After Payment
                     </span>
                   </div>
-                  <h4 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2">
+                  <h4 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2 break-words">
                     Submit Payment Receipt on WhatsApp
                   </h4>
-                  <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed break-words">
                     After making your bank transfer, tap the green button below to send your receipt on WhatsApp. Your submitted order details (Ref: <strong className="text-white font-mono">{orderRef}</strong>) will be prefilled automatically!
                   </p>
                 </div>
               </div>
 
               {/* 3 Quick Checklist Steps */}
-              <div className="bg-[#081313]/90 p-4 sm:p-5 rounded-2xl border-2 border-emerald-500/40 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm text-zinc-100 font-semibold">
-                <div className="flex items-center gap-2.5">
+              <div className="bg-[#081313]/90 p-4 sm:p-5 rounded-2xl border-2 border-emerald-500/40 grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-sm text-zinc-100 font-semibold overflow-hidden">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">1</span>
-                  <span>Transfer <strong>₦{amountDueNow.toLocaleString()}</strong> to account</span>
+                  <span className="break-words">Transfer <strong>₦{amountDueNow.toLocaleString()}</strong> to account</span>
                 </div>
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">2</span>
-                  <span>Take screenshot of debit receipt</span>
+                  <span className="break-words">Take screenshot of debit receipt</span>
                 </div>
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">3</span>
-                  <span>Tap green button below to send</span>
+                  <span className="break-words">Tap green button below to send</span>
                 </div>
               </div>
 
@@ -1151,27 +1159,27 @@ export default function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSendReceiptWhatsAppClick}
-                className="w-full py-5 sm:py-6 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-lg sm:text-2xl flex items-center justify-center gap-3 shadow-2xl transition transform active:scale-98 text-center cursor-pointer group"
+                className="w-full py-4 sm:py-6 px-4 sm:px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-base sm:text-xl md:text-2xl flex items-center justify-center gap-2.5 sm:gap-3 shadow-2xl transition transform active:scale-98 text-center cursor-pointer group flex-wrap sm:flex-nowrap"
               >
-                <MessageSquare className="w-7 h-7 shrink-0 group-hover:scale-110 transition-transform" />
-                <span>Send Payment Receipt on WhatsApp</span>
-                <ArrowRight className="w-6 h-6 shrink-0" />
+                <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="break-words">Send Payment Receipt on WhatsApp</span>
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
               </a>
 
               <div className="flex flex-wrap items-center justify-between text-xs sm:text-sm text-zinc-300 font-medium gap-2 pt-2 border-t border-emerald-500/30">
-                <span>Direct Author Helpline: <strong className="text-white font-bold">{FORMATTED_PHONE}</strong></span>
-                <span className="text-emerald-400 font-bold">✓ Instant Waybill & Courier Dispatch Confirmation</span>
+                <span className="break-words">Direct Author Helpline: <strong className="text-white font-bold">{FORMATTED_PHONE}</strong></span>
+                <span className="text-emerald-400 font-bold break-words">✓ Instant Waybill & Courier Dispatch Confirmation</span>
               </div>
             </div>
 
             {/* 4. AND THEN ORDER DETAILS */}
-            <div className="bg-[#141624] p-5 sm:p-7 rounded-2xl sm:rounded-3xl border-2 border-zinc-700 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between border-b border-zinc-700 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-zinc-700 text-white flex items-center justify-center font-black text-sm">
+            <div className="bg-[#141624] p-4 sm:p-7 rounded-2xl sm:rounded-3xl border-2 border-zinc-700 space-y-4 shadow-xl overflow-hidden">
+              <div className="flex items-center justify-between border-b border-zinc-700 pb-3 gap-2">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className="w-8 h-8 rounded-xl bg-zinc-700 text-white flex items-center justify-center font-black text-sm shrink-0">
                     3
                   </span>
-                  <h4 className="font-extrabold text-white text-base sm:text-xl">
+                  <h4 className="font-extrabold text-white text-base sm:text-xl truncate">
                     Submitted Order Details
                   </h4>
                 </div>
@@ -1181,55 +1189,55 @@ export default function App() {
                     setCurrentPage('order');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="text-xs sm:text-sm text-orange-400 hover:text-orange-300 font-bold underline cursor-pointer"
+                  className="text-xs sm:text-sm text-orange-400 hover:text-orange-300 font-bold underline cursor-pointer shrink-0"
                 >
                   Modify Details
                 </button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-zinc-200">
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Customer Name:</span>
-                  <strong className="text-white text-base sm:text-lg">{name}</strong>
+                  <strong className="text-white text-base sm:text-lg break-words">{name}</strong>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Phone / WhatsApp:</span>
-                  <strong className="text-white text-base sm:text-lg font-mono">{phone}</strong>
+                  <strong className="text-white text-base sm:text-lg font-mono break-all">{phone}</strong>
                 </div>
-                <div>
+                <div className="min-w-0 sm:col-span-2">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Email Address:</span>
-                  <span className="text-zinc-100">{email}</span>
+                  <span className="text-zinc-100 break-all">{email}</span>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Number of Copies:</span>
-                  <strong className="text-white text-base">
+                  <strong className="text-white text-base break-words">
                     {quantity} {quantity > 1 ? 'copies' : 'copy'}{discountPercent > 0 ? ` (${discountPercent}% OFF applied)` : ''}
                   </strong>
                 </div>
-                <div className="sm:col-span-2">
+                <div className="min-w-0 sm:col-span-2">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Delivery Address:</span>
-                  <span className="text-zinc-100 text-sm sm:text-base font-medium">{address}</span>
+                  <span className="text-zinc-100 text-sm sm:text-base font-medium break-words whitespace-pre-wrap">{address}</span>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Order Option:</span>
-                  <span className="text-zinc-100 font-medium">
+                  <span className="text-zinc-100 font-medium break-words">
                     {deliveryOption === 'direct' ? 'Direct Order (Full Payment)' : 'Pay on Delivery'}
                   </span>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Nationwide Delivery:</span>
                   <span className="text-emerald-400 font-bold">FREE (Special Offer)</span>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Total Order Cost:</span>
                   <strong className="text-white font-mono text-base sm:text-lg">₦{grandTotal.toLocaleString()}</strong>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Amount Due Now:</span>
                   <strong className="text-orange-400 font-mono text-lg sm:text-xl">₦{amountDueNow.toLocaleString()}</strong>
                 </div>
                 {deliveryOption === 'pod' && (
-                  <div className="sm:col-span-2 pt-3 border-t border-zinc-800 text-sm sm:text-base text-amber-300 flex justify-between items-center">
+                  <div className="min-w-0 sm:col-span-2 pt-3 border-t border-zinc-800 text-sm sm:text-base text-amber-300 flex flex-wrap justify-between items-center gap-2">
                     <span>Balance to be paid upon delivery:</span>
                     <strong className="text-white font-mono text-base sm:text-lg">₦{balanceOnDelivery.toLocaleString()}</strong>
                   </div>
@@ -1237,25 +1245,36 @@ export default function App() {
               </div>
             </div>
 
-            {/* MOBILE FLOATING STICKY ACTION BAR (VISIBLE ONLY ON MOBILE < 768px) */}
-            <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0b0c16]/95 backdrop-blur-md border-t-2 border-emerald-500 px-4 py-3.5 shadow-[0_-10px_25px_rgba(0,0,0,0.8)] md:hidden flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-[11px] text-zinc-300 font-bold uppercase tracking-wider">Amount Due</p>
-                <p className="text-xl font-black text-white font-mono leading-tight">
-                  ₦{amountDueNow.toLocaleString()}
+            {/* BUTTON BELOW ORDER DETAILS (REPLACES STICKY FOOTER AS REQUESTED) */}
+            <div className="bg-[#121424] border-2 border-emerald-500 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-4 shadow-2xl text-center overflow-hidden">
+              <div className="max-w-xl mx-auto space-y-2">
+                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300 bg-emerald-950/90 px-3.5 py-1 rounded-full border border-emerald-400/40">
+                  <Check className="w-4 h-4 stroke-[3]" />
+                  Final Step: Send Payment Receipt
+                </span>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white break-words">
+                  Ready to Confirm Your Delivery?
+                </h3>
+                <p className="text-sm sm:text-base text-zinc-200 leading-relaxed break-words">
+                  Once you have transferred <strong className="text-amber-300 font-mono">₦{amountDueNow.toLocaleString()}</strong>, tap below to submit your receipt on WhatsApp. Sharon Olaniyi will verify your transfer and dispatch your parcel immediately!
                 </p>
               </div>
+
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSendReceiptWhatsAppClick}
-                className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg active:scale-95 transition shrink-0"
+                className="w-full py-4 sm:py-6 px-4 sm:px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-base sm:text-xl md:text-2xl flex items-center justify-center gap-2.5 sm:gap-3 shadow-2xl transition transform active:scale-98 text-center cursor-pointer group flex-wrap sm:flex-nowrap"
               >
-                <MessageSquare className="w-5 h-5 shrink-0" />
-                <span>Send Receipt on WhatsApp</span>
-                <ArrowRight className="w-4 h-4 shrink-0" />
+                <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="break-words">Send Payment Receipt on WhatsApp</span>
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
               </a>
+
+              <p className="text-xs sm:text-sm text-zinc-400 font-medium break-words">
+                Order Reference: <strong className="text-white font-mono">{orderRef}</strong> • Author Helpline: <strong className="text-zinc-200">{FORMATTED_PHONE}</strong>
+              </p>
             </div>
 
           </div>
