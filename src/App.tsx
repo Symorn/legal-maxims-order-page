@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  BookOpen, Check, MessageSquare, ArrowRight, ShieldCheck, 
+import {
+  BookOpen, Check, MessageSquare, ArrowRight, ShieldCheck,
   ExternalLink, CheckCircle2, Loader2, Plus, Minus, Tag, X,
   Copy, Building2, CreditCard, ArrowLeft, Clock, MapPin
 } from 'lucide-react';
@@ -11,7 +11,7 @@ const SELAR_SOFT_COPY_LINK = "https://selar.com/y18t00200g";
 const WHATSAPP_PHONE = "2349048402122";
 const FORMATTED_PHONE = "+234 904 840 2122";
 
-const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIV50ieJ1C_YCZQSbYR0bMlN9H20fRBcdpkha3kg6JSrJLa_I7-BsMgcKD8SW7EFyiuw/exec"; 
+const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIV50ieJ1C_YCZQSbYR0bMlN9H20fRBcdpkha3kg6JSrJLa_I7-BsMgcKD8SW7EFyiuw/exec";
 
 // Official Publisher Bank Accounts
 const BANK_ACCOUNTS = [
@@ -327,10 +327,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0a0b10] text-zinc-100 font-['Montserrat',sans-serif] selection:bg-orange-600 selection:text-white flex flex-col antialiased">
-      
+
       {/* Top Header */}
       <header className="border-b-2 border-zinc-800 bg-[#12141f] py-4 px-4 sm:px-6 sticky top-0 z-30 shadow-xl">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
+        <div className={`mx-auto flex items-center justify-between ${currentPage === 'payment' ? 'max-w-6xl' : 'max-w-4xl'}`}>
           <div>
             <h1 className="font-extrabold text-base sm:text-xl tracking-wider text-white">
               LEGAL MAXIMS SIMPLIFIED
@@ -345,23 +345,23 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-10">
-        
+      <main className={`flex-1 mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 ${currentPage === 'payment' ? 'max-w-6xl pb-28 md:pb-12' : 'max-w-4xl'} space-y-8`}>
+
         {/* ======================================================== */}
         {/* VIEW 1: MAIN ORDER PAGE                                  */}
         {/* ======================================================== */}
         {currentPage === 'order' && (
           <div className="space-y-10 animate-in fade-in duration-300">
-            
+
             {/* Book Showcase Card */}
             <div className="bg-[#141624] border-2 border-zinc-700/80 rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
-              
+
               {/* Exact Book Cover Image */}
               <div className="w-64 sm:w-72 shrink-0">
                 <div className="rounded-2xl overflow-hidden border-2 border-zinc-600 shadow-[0_16px_40px_rgba(0,0,0,0.9)] bg-black">
-                  <img 
-                    src={bookCoverImg} 
-                    alt="Legal Maxims Simplified - Sharon O. Olaniyi" 
+                  <img
+                    src={bookCoverImg}
+                    alt="Legal Maxims Simplified - Sharon O. Olaniyi"
                     className="w-full h-auto object-cover block"
                     loading="eager"
                   />
@@ -428,24 +428,22 @@ export default function App() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                
+
                 {/* Hard Copy Card */}
                 <div
                   onClick={() => handleSelectBookType('hard')}
-                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${
-                    bookType === 'hard'
+                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${bookType === 'hard'
                       ? 'bg-[#1a1d30] border-orange-500 shadow-2xl'
                       : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start justify-between">
                     <div>
                       <h4 className="font-black text-lg sm:text-xl text-white">Hard Copy (Physical Book)</h4>
                       <p className="text-sm text-zinc-300 mt-1 font-medium">Printed book delivered directly to your doorstep anywhere in Nigeria.</p>
                     </div>
-                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${
-                      bookType === 'hard' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
-                    }`}>
+                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'hard' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
+                      }`}>
                       {bookType === 'hard' && <Check className="w-4 h-4 stroke-[3]" />}
                     </div>
                   </div>
@@ -467,20 +465,18 @@ export default function App() {
                 {/* Soft Copy Card */}
                 <div
                   onClick={() => handleSelectBookType('soft')}
-                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${
-                    bookType === 'soft'
+                  className={`p-6 rounded-2xl border-3 cursor-pointer transition ${bookType === 'soft'
                       ? 'bg-[#1a1d30] border-orange-500 shadow-2xl'
                       : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start justify-between">
                     <div>
                       <h4 className="font-black text-lg sm:text-xl text-white">Soft Copy — Read Online</h4>
                       <p className="text-sm text-zinc-300 mt-1 font-medium">Instant access to read on your smartphone, tablet, or laptop via Selar.</p>
                     </div>
-                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${
-                      bookType === 'soft' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
-                    }`}>
+                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center mt-1 shrink-0 ${bookType === 'soft' ? 'border-orange-500 bg-orange-600 text-white' : 'border-zinc-500'
+                      }`}>
                       {bookType === 'soft' && <Check className="w-4 h-4 stroke-[3]" />}
                     </div>
                   </div>
@@ -535,7 +531,7 @@ export default function App() {
             {/* IF HARD COPY: ORDER FORM */}
             {bookType === 'hard' && (
               <form onSubmit={handleSubmitOrder} className="bg-[#141624] border-2 border-zinc-700 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
-                
+
                 {/* STEP 2: QUANTITY & BULK DISCOUNT */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -594,11 +590,10 @@ export default function App() {
                         onClick={() => {
                           if (quantity >= 5) handleQuantityChange(1);
                         }}
-                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${
-                          quantity < 5 
-                            ? 'bg-[#1e2238] border-orange-500 shadow-lg ring-2 ring-orange-500/30 text-white' 
+                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${quantity < 5
+                            ? 'bg-[#1e2238] border-orange-500 shadow-lg ring-2 ring-orange-500/30 text-white'
                             : 'bg-[#121422] border-zinc-700 hover:border-zinc-500 text-zinc-400'
-                        }`}
+                          }`}
                       >
                         {quantity < 5 && (
                           <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-orange-500" />
@@ -614,11 +609,10 @@ export default function App() {
                         onClick={() => {
                           if (quantity < 5) handleQuantityChange(5);
                         }}
-                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${
-                          quantity >= 5 
-                            ? 'bg-emerald-950/90 border-emerald-500 shadow-lg ring-2 ring-emerald-500/30 text-emerald-200' 
+                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer text-center relative flex flex-col items-center justify-between hover:scale-[1.01] active:scale-[0.98] ${quantity >= 5
+                            ? 'bg-emerald-950/90 border-emerald-500 shadow-lg ring-2 ring-emerald-500/30 text-emerald-200'
                             : 'bg-[#121422] border-zinc-700 hover:border-emerald-600/50 text-zinc-400'
-                        }`}
+                          }`}
                       >
                         {quantity >= 5 && (
                           <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-emerald-400" />
@@ -670,9 +664,8 @@ export default function App() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your full name"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${
-                          errors.name ? 'border-red-500' : 'border-zinc-600'
-                        }`}
+                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.name ? 'border-red-500' : 'border-zinc-600'
+                          }`}
                       />
                       {errors.name && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.name}</p>}
                     </div>
@@ -686,9 +679,8 @@ export default function App() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email address"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${
-                          errors.email ? 'border-red-500' : 'border-zinc-600'
-                        }`}
+                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.email ? 'border-red-500' : 'border-zinc-600'
+                          }`}
                       />
                       {errors.email && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.email}</p>}
                     </div>
@@ -702,9 +694,8 @@ export default function App() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. 08012345678"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${
-                          errors.phone ? 'border-red-500' : 'border-zinc-600'
-                        }`}
+                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.phone ? 'border-red-500' : 'border-zinc-600'
+                          }`}
                       />
                       {errors.phone && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.phone}</p>}
                     </div>
@@ -718,9 +709,8 @@ export default function App() {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder="Enter your house or office address, city, and state"
-                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${
-                          errors.address ? 'border-red-500' : 'border-zinc-600'
-                        }`}
+                        className={`w-full bg-[#1b1e32] border-2 rounded-2xl px-4 py-3.5 text-base sm:text-lg text-white placeholder-zinc-400 focus:outline-hidden focus:border-orange-500 ${errors.address ? 'border-red-500' : 'border-zinc-600'
+                          }`}
                       />
                       {errors.address && <p className="text-xs sm:text-sm text-red-400 font-bold mt-1">{errors.address}</p>}
                     </div>
@@ -739,11 +729,10 @@ export default function App() {
                   <div className="space-y-3.5">
                     {/* Option 1: Direct order */}
                     <label
-                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${
-                        deliveryOption === 'direct'
+                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${deliveryOption === 'direct'
                           ? 'bg-[#1b1e32] border-orange-500 shadow-xl'
                           : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-start gap-4">
                         <input
@@ -772,11 +761,10 @@ export default function App() {
 
                     {/* Option 2: Pay on delivery */}
                     <label
-                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${
-                        deliveryOption === 'pod'
+                      className={`p-5 rounded-2xl border-3 flex items-start justify-between cursor-pointer transition ${deliveryOption === 'pod'
                           ? 'bg-[#1b1e32] border-orange-500 shadow-xl'
                           : 'bg-[#141624] border-zinc-700 hover:border-zinc-500'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-start gap-4">
                         <input
@@ -805,7 +793,7 @@ export default function App() {
                       <ShieldCheck className="w-6 h-6 text-amber-400 shrink-0" />
                       <span>Notice: Special Offer & Pay on Delivery Policy</span>
                     </div>
-                    
+
                     <div className="space-y-2.5 text-sm sm:text-base leading-relaxed">
                       <div className="flex items-start gap-2.5">
                         <span className="text-emerald-400 font-black text-base shrink-0 mt-0.5">✓</span>
@@ -907,109 +895,111 @@ export default function App() {
         {/* VIEW 2: DEDICATED PAYMENT & ACCOUNT DETAILS PAGE          */}
         {/* ======================================================== */}
         {currentPage === 'payment' && (
-          <div className="space-y-8 animate-in fade-in duration-300">
-            
-            {/* Top Navigation Bar with Back Button & Progress Indicator */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+          <div className="space-y-6 animate-in fade-in duration-300">
+
+            {/* Top Navigation Bar: Back link & Order status */}
+            <div className="flex items-center justify-between gap-3 border-b border-zinc-800 pb-3 text-sm sm:text-base">
               <button
                 type="button"
                 onClick={() => {
                   setCurrentPage('order');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-400 hover:text-white transition cursor-pointer"
+                className="inline-flex items-center gap-1.5 font-bold text-zinc-300 hover:text-white transition cursor-pointer"
               >
-                <ArrowLeft className="w-4 h-4" />
-                <span>← Modify Order Details</span>
+                <ArrowLeft className="w-5 h-5" />
+                <span>← Back to Modify Details</span>
               </button>
 
-              <div className="flex items-center gap-2 text-xs font-bold">
-                <span className="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/80 px-3 py-1.5 rounded-full border border-emerald-500/30">
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  <span>Step 1: Order Submitted</span>
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40 font-bold text-xs sm:text-sm">
+                  <Check className="w-4 h-4 stroke-[3]" />
+                  <span>Order Saved</span>
                 </span>
-                <span className="text-zinc-600">→</span>
-                <span className="flex items-center gap-1.5 text-orange-400 bg-orange-950/80 px-3 py-1.5 rounded-full border border-orange-500/40">
+                <span className="text-zinc-600 font-bold">→</span>
+                <span className="flex items-center gap-1.5 text-orange-400 bg-orange-950/80 px-3 py-1 rounded-full border border-orange-500/50 font-bold text-xs sm:text-sm">
                   <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-                  <span>Step 2: Transfer & Send Receipt</span>
+                  <span>Make Payment</span>
                 </span>
               </div>
             </div>
 
-            {/* Order Confirmation Banner with Order Reference */}
-            <div className="bg-gradient-to-r from-orange-950/50 via-[#161826] to-amber-950/40 border-2 border-orange-500/50 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
-              <div className="flex items-center gap-4 text-center sm:text-left">
-                <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/40 shadow-inner">
-                  <CheckCircle2 className="w-9 h-9" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-mono font-extrabold uppercase tracking-wider text-orange-400 bg-orange-950 px-3 py-1 rounded-full border border-orange-500/30">
-                    Order Saved Successfully
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-white mt-1.5">
-                    Make Payment to Confirm Order
-                  </h2>
-                  <p className="text-xs sm:text-sm text-zinc-300 mt-1 font-medium">
-                    Transfer the required amount below to complete your order and submit your receipt on WhatsApp.
-                  </p>
-                </div>
+            {/* 1. A LITTLE MESSAGE ON WHAT THEY NEED TO DO NEXT */}
+            <div className="bg-gradient-to-r from-orange-950/90 via-[#151829] to-emerald-950/80 border-2 border-orange-500/70 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl flex items-start gap-4">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-orange-600/30 text-orange-400 flex items-center justify-center shrink-0 border-2 border-orange-500/50 font-black text-2xl shadow-inner">
+                ⚡
               </div>
-
-              {/* Order Reference Box with 1-Click Copy */}
-              <div className="bg-[#0e101a] p-4 rounded-2xl border border-zinc-700 text-center sm:text-right shrink-0 w-full sm:w-auto">
-                <p className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest">Official Order Ref</p>
-                <p className="font-mono text-xl sm:text-2xl font-black text-orange-400 tracking-wider">
-                  {orderRef}
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-orange-300 bg-orange-950 px-3 py-1 rounded-full border border-orange-500/40">
+                    Official Order Ref: {orderRef}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(orderRef, 'ref')}
+                    className="text-xs sm:text-sm text-zinc-300 hover:text-white font-bold underline cursor-pointer"
+                  >
+                    {copiedItem === 'ref' ? '✓ Copied Ref!' : 'Copy Ref'}
+                  </button>
+                </div>
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2">
+                  What you need to do next to confirm your order:
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed">
+                  Please transfer exactly <strong className="text-amber-300 font-mono font-black text-base sm:text-xl">₦{amountDueNow.toLocaleString()}</strong> into either verified bank account below, then tap the green button to send your payment receipt on WhatsApp so your copy can be confirmed and dispatched immediately.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(orderRef, 'ref')}
-                  className="mt-1.5 text-xs text-zinc-300 hover:text-white inline-flex items-center gap-1 font-semibold transition cursor-pointer"
-                >
-                  {copiedItem === 'ref' ? (
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5 stroke-[3]" /> Copied Ref!
-                    </span>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy Ref</span>
-                    </>
-                  )}
-                </button>
               </div>
             </div>
 
-            {/* AMOUNT DUE NOW HERO CARD (WITH CLICK TO COPY) */}
-            <div className="bg-[#141624] border-2 border-orange-500 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            {/* 2. THEN ACCOUNT OPTIONS */}
+            <div className="bg-[#131627] border-2 border-zinc-600 rounded-2xl sm:rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-700 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-sm shadow-md">
+                    1
+                  </span>
+                  <div>
+                    <h3 className="text-lg sm:text-2xl font-black text-white">
+                      Official Publisher Bank Accounts
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-300 font-medium">
+                      Transfer into either Moniepoint or Opay below
+                    </p>
+                  </div>
+                </div>
+                <div className="text-sm sm:text-base text-zinc-200 sm:text-right">
+                  Account Name: <strong className="text-white font-black text-base sm:text-lg underline decoration-orange-500">Sharon Olaniyi</strong>
+                </div>
+              </div>
+
+              {/* Amount Due Box with 1-Click Copy */}
+              <div className="bg-[#0b0d17] p-4 sm:p-6 rounded-2xl border-2 border-orange-500/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-inner">
                 <div>
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-orange-400">
-                    {deliveryOption === 'direct' ? 'Total Amount To Transfer' : 'Amount Required Now (Commitment Deposit)'}
-                  </p>
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-orange-400 block">
+                    {deliveryOption === 'direct' ? 'Total Amount To Transfer' : 'Commitment Deposit Required Now (Pay on Delivery)'}
+                  </span>
                   <div className="flex items-baseline gap-2 mt-1">
-                    <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                    <span className="text-3xl sm:text-5xl font-black text-white font-mono tracking-tight">
                       ₦{amountDueNow.toLocaleString()}
                     </span>
                   </div>
-                  <p className="text-sm text-zinc-300 mt-1.5">
+                  <p className="text-xs sm:text-sm text-zinc-200 mt-1 font-medium">
                     {deliveryOption === 'direct' ? (
-                      <span className="text-emerald-400 font-semibold">
+                      <span className="text-emerald-400 font-bold">
                         ✓ Full payment for {quantity} {quantity > 1 ? 'copies' : 'copy'} (Free Nationwide Doorstep Delivery included)
                       </span>
                     ) : (
-                      <span className="text-amber-300 font-semibold">
+                      <span className="text-amber-300 font-bold">
                         ⚠️ ₦5,000 Commitment Deposit to dispatch. Balance of ₦{balanceOnDelivery.toLocaleString()} is paid upon delivery.
                       </span>
                     )}
                   </p>
                 </div>
 
-                {/* CLICK TO COPY AMOUNT BUTTON */}
                 <button
                   type="button"
                   onClick={() => handleCopy(amountDueNow.toString(), 'amount')}
-                  className={`px-6 py-4 rounded-2xl font-black text-base flex items-center justify-center gap-2.5 transition transform active:scale-95 cursor-pointer shadow-lg shrink-0 ${
+                  className={`px-5 py-4 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2 transition cursor-pointer shadow-lg shrink-0 ${
                     copiedItem === 'amount'
                       ? 'bg-emerald-600 text-white border-2 border-emerald-400'
                       : 'bg-zinc-800 hover:bg-zinc-700 text-white border-2 border-zinc-600'
@@ -1023,78 +1013,68 @@ export default function App() {
                   ) : (
                     <>
                       <Copy className="w-5 h-5" />
-                      <span>Click to Copy Amount (₦{amountDueNow.toLocaleString()})</span>
+                      <span>Click to Copy Amount</span>
                     </>
                   )}
                 </button>
               </div>
-            </div>
 
-            {/* OFFICIAL BANK ACCOUNTS TO TRANSFER TO */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2.5 text-white">
-                <Building2 className="w-6 h-6 text-orange-400" />
-                <h3 className="text-xl sm:text-2xl font-black">
-                  Official Publisher Accounts:
-                </h3>
-              </div>
-              <p className="text-sm text-zinc-300">
-                Please transfer exactly <strong className="text-white">₦{amountDueNow.toLocaleString()}</strong> into either account below. Click the button to copy the account number:
-              </p>
-
+              {/* Bank Cards Grid (Side-by-side on desktop/tablet, clean stack on mobile) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                
                 {BANK_ACCOUNTS.map((bank) => {
                   const isCopied = copiedItem === bank.id;
                   const isMoniepoint = bank.id === 'moniepoint';
 
                   return (
-                    <div 
-                      key={bank.id} 
-                      className={`bg-[#1b1e32] border-2 rounded-3xl p-6 sm:p-7 space-y-4 shadow-xl transition relative overflow-hidden ${
+                    <div
+                      key={bank.id}
+                      className={`bg-[#181b30] border-2 rounded-2xl p-5 sm:p-6 space-y-4 shadow-xl transition relative overflow-hidden ${
                         isMoniepoint ? 'border-zinc-600 hover:border-orange-500' : 'border-zinc-600 hover:border-emerald-500'
                       }`}
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between border-b border-zinc-700/80 pb-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border-2 ${
                             isMoniepoint 
-                              ? 'bg-orange-600/20 text-orange-400 border-orange-500/40' 
-                              : 'bg-emerald-600/20 text-emerald-400 border-emerald-500/40'
+                              ? 'bg-orange-600/20 text-orange-400 border-orange-500/50' 
+                              : 'bg-emerald-600/20 text-emerald-400 border-emerald-500/50'
                           }`}>
                             {isMoniepoint ? <Building2 className="w-6 h-6" /> : <CreditCard className="w-6 h-6" />}
                           </div>
                           <div>
-                            <p className="text-xs uppercase font-mono font-bold tracking-wider text-zinc-400">
-                              {isMoniepoint ? 'Account Option 1' : 'Account Option 2'}
-                            </p>
-                            <h4 className="text-xl font-black text-white">{bank.bankName}</h4>
+                            <span className="text-xs uppercase font-mono font-bold tracking-wider text-zinc-300">
+                              {isMoniepoint ? 'Bank Option 1' : 'Bank Option 2'}
+                            </span>
+                            <h4 className="text-xl sm:text-2xl font-black text-white">{bank.bankName}</h4>
                           </div>
                         </div>
-                        <span className={`text-[10px] font-bold uppercase px-2.5 py-1 rounded-full border ${
+                        <span className={`text-xs font-bold uppercase px-3 py-1 rounded-full border ${
                           isMoniepoint 
-                            ? 'bg-orange-950 text-orange-300 border-orange-500/30' 
-                            : 'bg-emerald-950 text-emerald-300 border-emerald-500/30'
+                            ? 'bg-orange-950 text-orange-300 border-orange-500/40' 
+                            : 'bg-emerald-950 text-emerald-300 border-emerald-500/40'
                         }`}>
                           {bank.tag}
                         </span>
                       </div>
 
-                      <div className="bg-[#0e101a] p-4 rounded-2xl border border-zinc-700/80 space-y-1">
-                        <p className="text-xs text-zinc-400 uppercase tracking-wider font-medium">Account Number:</p>
-                        <p className="font-mono text-2xl sm:text-3xl font-black text-white tracking-widest">
+                      {/* High-Legibility Account Number Box */}
+                      <div className="bg-[#090b14] p-4 sm:p-5 rounded-2xl border-2 border-zinc-700 space-y-2">
+                        <div className="flex items-center justify-between text-xs sm:text-sm text-zinc-300 font-semibold">
+                          <span className="uppercase tracking-wider">Account Number:</span>
+                          <span className="text-zinc-400 font-mono">10 Digits</span>
+                        </div>
+                        <p className="font-mono text-3xl sm:text-4xl font-black text-amber-300 tracking-wider py-0.5 select-all">
                           {bank.accountNumber}
                         </p>
-                        <p className="text-sm text-zinc-300 pt-1 font-medium">
-                          Account Name: <strong className="text-white">{bank.accountName}</strong>
+                        <p className="text-sm sm:text-base text-zinc-200 pt-1 font-medium">
+                          Account Name: <strong className="text-white text-base sm:text-lg font-bold">{bank.accountName}</strong>
                         </p>
                       </div>
 
-                      {/* COPY ACCOUNT NUMBER BUTTON */}
                       <button
                         type="button"
                         onClick={() => handleCopy(bank.accountNumber, bank.id)}
-                        className={`w-full py-4 px-4 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 transition transform active:scale-98 cursor-pointer shadow-md ${
+                        className={`w-full py-4 px-5 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition transform active:scale-98 cursor-pointer shadow-lg ${
                           isCopied
                             ? 'bg-emerald-600 text-white'
                             : isMoniepoint
@@ -1117,23 +1097,51 @@ export default function App() {
                     </div>
                   );
                 })}
+              </div>
 
+              <div className="text-xs sm:text-sm text-zinc-300 flex items-center gap-2 pt-1 font-medium">
+                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                <span>All payments are confirmed directly by author Sharon Olaniyi. Waybill details sent on WhatsApp immediately.</span>
               </div>
             </div>
 
-            {/* NEXT STEP: WHATSAPP RECEIPT SUBMISSION CARD */}
-            <div className="bg-gradient-to-r from-emerald-950/80 via-[#131b26] to-emerald-950/70 border-2 border-emerald-500 p-6 sm:p-8 rounded-3xl space-y-5 shadow-2xl">
+            {/* 3. RECEIPT SENDING */}
+            <div className="bg-gradient-to-r from-emerald-950 via-[#11241f] to-emerald-950 border-2 border-emerald-500 rounded-2xl sm:rounded-3xl p-5 sm:p-7 space-y-5 shadow-2xl relative overflow-hidden">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-black flex items-center justify-center shrink-0 shadow-lg font-black text-xl">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 text-black flex items-center justify-center shrink-0 shadow-lg font-black text-2xl">
                   ✓
                 </div>
-                <div>
-                  <h4 className="text-xl sm:text-2xl font-black text-white">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-xl bg-emerald-500 text-black flex items-center justify-center font-black text-xs">
+                      2
+                    </span>
+                    <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300 bg-emerald-900/90 px-3 py-1 rounded-full border border-emerald-400/40 animate-pulse">
+                      Required Action After Payment
+                    </span>
+                  </div>
+                  <h4 className="text-lg sm:text-2xl md:text-3xl font-black text-white mt-2">
                     Submit Payment Receipt on WhatsApp
                   </h4>
-                  <p className="text-sm sm:text-base text-zinc-200 mt-1">
-                    After completing your bank transfer, click the green button below to send your receipt on WhatsApp. Your submitted order details will be automatically prefilled!
+                  <p className="text-sm sm:text-base md:text-lg text-zinc-100 mt-1.5 leading-relaxed">
+                    After making your bank transfer, tap the green button below to send your receipt on WhatsApp. Your submitted order details (Ref: <strong className="text-white font-mono">{orderRef}</strong>) will be prefilled automatically!
                   </p>
+                </div>
+              </div>
+
+              {/* 3 Quick Checklist Steps */}
+              <div className="bg-[#081313]/90 p-4 sm:p-5 rounded-2xl border-2 border-emerald-500/40 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm text-zinc-100 font-semibold">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">1</span>
+                  <span>Transfer <strong>₦{amountDueNow.toLocaleString()}</strong> to account</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">2</span>
+                  <span>Take screenshot of debit receipt</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 border border-emerald-500/50">3</span>
+                  <span>Tap green button below to send</span>
                 </div>
               </div>
 
@@ -1143,84 +1151,111 @@ export default function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSendReceiptWhatsAppClick}
-                className="w-full py-5 px-8 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-lg sm:text-xl flex items-center justify-center gap-3 shadow-2xl transition transform active:scale-98 text-center cursor-pointer"
+                className="w-full py-5 sm:py-6 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-lg sm:text-2xl flex items-center justify-center gap-3 shadow-2xl transition transform active:scale-98 text-center cursor-pointer group"
               >
-                <MessageSquare className="w-7 h-7 shrink-0" />
+                <MessageSquare className="w-7 h-7 shrink-0 group-hover:scale-110 transition-transform" />
                 <span>Send Payment Receipt on WhatsApp</span>
                 <ArrowRight className="w-6 h-6 shrink-0" />
               </a>
 
-              <p className="text-center text-xs text-zinc-400">
-                Official Author & Publisher Line: {FORMATTED_PHONE} • Fast Dispatch Confirmation
-              </p>
+              <div className="flex flex-wrap items-center justify-between text-xs sm:text-sm text-zinc-300 font-medium gap-2 pt-2 border-t border-emerald-500/30">
+                <span>Direct Author Helpline: <strong className="text-white font-bold">{FORMATTED_PHONE}</strong></span>
+                <span className="text-emerald-400 font-bold">✓ Instant Waybill & Courier Dispatch Confirmation</span>
+              </div>
             </div>
 
-            {/* SUMMARY OF SUBMITTED ORDER DETAILS */}
-            <div className="bg-[#141624] p-6 sm:p-7 rounded-3xl border-2 border-zinc-700 space-y-4">
+            {/* 4. AND THEN ORDER DETAILS */}
+            <div className="bg-[#141624] p-5 sm:p-7 rounded-2xl sm:rounded-3xl border-2 border-zinc-700 space-y-4 shadow-xl">
               <div className="flex items-center justify-between border-b border-zinc-700 pb-3">
-                <h4 className="font-extrabold text-white text-base sm:text-lg">
-                  Submitted Order Summary
-                </h4>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-zinc-700 text-white flex items-center justify-center font-black text-sm">
+                    3
+                  </span>
+                  <h4 className="font-extrabold text-white text-base sm:text-xl">
+                    Submitted Order Details
+                  </h4>
+                </div>
                 <button
                   type="button"
                   onClick={() => {
                     setCurrentPage('order');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="text-xs text-orange-400 hover:text-orange-300 font-bold underline cursor-pointer"
+                  className="text-xs sm:text-sm text-orange-400 hover:text-orange-300 font-bold underline cursor-pointer"
                 >
-                  Edit Details
+                  Modify Details
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-zinc-200">
                 <div>
-                  <span className="text-zinc-500 block text-xs">Customer Name:</span>
-                  <strong className="text-white text-base">{name}</strong>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Customer Name:</span>
+                  <strong className="text-white text-base sm:text-lg">{name}</strong>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Phone / WhatsApp:</span>
-                  <strong className="text-white text-base">{phone}</strong>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Phone / WhatsApp:</span>
+                  <strong className="text-white text-base sm:text-lg font-mono">{phone}</strong>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Email Address:</span>
-                  <span className="text-zinc-200">{email}</span>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Email Address:</span>
+                  <span className="text-zinc-100">{email}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Number of Copies:</span>
-                  <strong className="text-white">
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Number of Copies:</span>
+                  <strong className="text-white text-base">
                     {quantity} {quantity > 1 ? 'copies' : 'copy'}{discountPercent > 0 ? ` (${discountPercent}% OFF applied)` : ''}
                   </strong>
                 </div>
                 <div className="sm:col-span-2">
-                  <span className="text-zinc-500 block text-xs">Delivery Address:</span>
-                  <span className="text-zinc-200">{address}</span>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Delivery Address:</span>
+                  <span className="text-zinc-100 text-sm sm:text-base font-medium">{address}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Selected Option:</span>
-                  <strong className="text-white">
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Order Option:</span>
+                  <span className="text-zinc-100 font-medium">
                     {deliveryOption === 'direct' ? 'Direct Order (Full Payment)' : 'Pay on Delivery'}
-                  </strong>
+                  </span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Nationwide Delivery:</span>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Nationwide Delivery:</span>
                   <span className="text-emerald-400 font-bold">FREE (Special Offer)</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Total Order Cost:</span>
-                  <strong className="text-white font-mono text-base">₦{grandTotal.toLocaleString()}</strong>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Total Order Cost:</span>
+                  <strong className="text-white font-mono text-base sm:text-lg">₦{grandTotal.toLocaleString()}</strong>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-xs">Amount Due Now:</span>
-                  <strong className="text-orange-400 font-mono text-lg">₦{amountDueNow.toLocaleString()}</strong>
+                  <span className="text-zinc-400 block text-xs sm:text-sm font-semibold">Amount Due Now:</span>
+                  <strong className="text-orange-400 font-mono text-lg sm:text-xl">₦{amountDueNow.toLocaleString()}</strong>
                 </div>
                 {deliveryOption === 'pod' && (
-                  <div className="sm:col-span-2 pt-2 border-t border-zinc-700/60 text-xs sm:text-sm text-amber-300">
-                    <span>Balance to be paid to the courier upon delivery: </span>
-                    <strong className="text-white font-mono text-base">₦{balanceOnDelivery.toLocaleString()}</strong>
+                  <div className="sm:col-span-2 pt-3 border-t border-zinc-800 text-sm sm:text-base text-amber-300 flex justify-between items-center">
+                    <span>Balance to be paid upon delivery:</span>
+                    <strong className="text-white font-mono text-base sm:text-lg">₦{balanceOnDelivery.toLocaleString()}</strong>
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* MOBILE FLOATING STICKY ACTION BAR (VISIBLE ONLY ON MOBILE < 768px) */}
+            <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0b0c16]/95 backdrop-blur-md border-t-2 border-emerald-500 px-4 py-3.5 shadow-[0_-10px_25px_rgba(0,0,0,0.8)] md:hidden flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[11px] text-zinc-300 font-bold uppercase tracking-wider">Amount Due</p>
+                <p className="text-xl font-black text-white font-mono leading-tight">
+                  ₦{amountDueNow.toLocaleString()}
+                </p>
+              </div>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleSendReceiptWhatsAppClick}
+                className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg active:scale-95 transition shrink-0"
+              >
+                <MessageSquare className="w-5 h-5 shrink-0" />
+                <span>Send Receipt on WhatsApp</span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </a>
             </div>
 
           </div>
@@ -1232,11 +1267,10 @@ export default function App() {
       {!isDismissed && currentAlert && (
         <aside
           aria-live="polite"
-          className={`fixed bottom-4 left-4 z-40 max-w-sm w-[90%] sm:w-auto bg-[#151726]/95 border border-zinc-700 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl transition-all duration-500 ease-in-out transform ${
-            isAlertVisible
+          className={`fixed bottom-4 left-4 z-40 max-w-sm w-[90%] sm:w-auto bg-[#151726]/95 border border-zinc-700 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl transition-all duration-500 ease-in-out transform ${isAlertVisible
               ? 'translate-y-0 opacity-100 pointer-events-auto scale-100'
               : 'translate-y-6 opacity-0 pointer-events-none scale-95'
-          }`}
+            }`}
         >
           <div className="flex items-start gap-3">
             <div className="w-11 h-14 rounded-lg overflow-hidden shrink-0 border border-zinc-600 bg-black">
